@@ -1,0 +1,6 @@
+@MDC.Server.Api_HostAddress = http://localhost:5196
+
+GET {{MDC.Server.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
