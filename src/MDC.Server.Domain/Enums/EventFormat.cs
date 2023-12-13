@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MDC.Server.Domain.Entities.Users
+namespace MDC.Server.Domain.Enums
 {
-    internal class VolunteerDetail
+    public enum EventFormat
     {
+        InPerson,
+        Online,
+        Hybrid,
+        LiveStream,
     }
 }
