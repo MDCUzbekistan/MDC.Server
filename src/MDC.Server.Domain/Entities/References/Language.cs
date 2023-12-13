@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MDC.Server.Domain.Entities.Auth
+namespace MDC.Server.Domain.Entities.References
 {
-    public class UserPermission : Auditable<long>
+    public class Language : Auditable<short>
     {
+
     }
 }
