@@ -14,9 +14,7 @@ namespace MDC.Server.Data.DbContexts
 
         public DbSet<User> Users { get; set; }
         public DbSet<Event> Events { get; set; }
-        public DbSet<Region> Regions { get; set; }
         public DbSet<Language> Languages { get; set; }
-        public DbSet<Location> Locations { get; set; }
         public DbSet<UserEvent> UserEvents { get; set; }
         public DbSet<EventRole> EventRoles { get; set; }
         public DbSet<Community> Communities { get; set; }
@@ -25,7 +23,5 @@ namespace MDC.Server.Data.DbContexts
         public DbSet<UserLanguage> UserLanguages { get; set; }
         public DbSet<SpeakerDetail> SpeakerDetails { get; set;}
         public DbSet<CommunityRole> CommunityRoles { get; set; }
-        public DbSet<UserPermission> UserPermissions { get; set; }
-        public DbSet<RolePermission> RolePermissions { get; set; }
     }
 }
