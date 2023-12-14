@@ -9,6 +9,7 @@ namespace MDC.Server.Domain.Entities.References
 {
     public class Language : Auditable<short>
     {
-
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
