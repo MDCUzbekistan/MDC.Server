@@ -1,5 +1,9 @@
 using MDC.Server.Data.DbContexts;
+using MDC.Server.Data.IRepositories;
+using MDC.Server.Data.Repositories;
+using MDC.Server.Service.Interfaces.Users;
 using MDC.Server.Service.Mappings;
+using MDC.Server.Service.Services.Users;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +18,8 @@ builder.Services.AddDbContext<MDCServerDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
