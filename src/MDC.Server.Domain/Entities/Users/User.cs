@@ -1,4 +1,5 @@
 ﻿using MDC.Server.Domain.Commons;
+using MDC.Server.Domain.Entities.Communities;
 using MDC.Server.Domain.Entities.Events;
 using System;
 using System.Collections.Generic;
