@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MDC.Server.Domain.Entities.Events;
 
-namespace MDC.Server.Data.IRepositories
+namespace MDC.Server.Data.IRepositories;
+
+public interface IEventRoleRepository : IRepository<EventRole, short>
 {
-    internal class IEventRoleRepository
-    {
-    }
 }
