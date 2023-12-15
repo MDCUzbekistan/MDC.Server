@@ -1,12 +1,13 @@
 ﻿using MDC.Server.Domain.Commons;
+using Microsoft.VisualBasic;
 
 namespace MDC.Server.Data.IRepositories;
 
-public interface IRepository<TEntity> where TEntity : Auditable<TEntity>
+public interface IRepository<TEntity,TKey> where TEntity : Auditable<TKey>
 {
-    Task<bool> DeleteAsync(TEntity id);
+    Task<bool> DeleteAsync(TKey id);
     IQueryable<TEntity> SelectAll();
-    Task<TEntity> SelectByIdAsync(TEntity id);
+    Task<TEntity> SelectByIdAsync(TKey id);
     Task<TEntity> InsertAsync(TEntity entity);
     Task<TEntity> UpdateAsync(TEntity entity);
 }
