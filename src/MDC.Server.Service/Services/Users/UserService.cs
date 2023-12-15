@@ -23,9 +23,9 @@ public class UserService : IUserService
     public async Task<UserForResultDto> AddAsync(UserForCreationDto dto)
     {
         var user = await _repository.SelectAll()
-            .Where(u => u.Email == dto.Email)
-            .AsNoTracking()
-            .FirstOrDefaultAsync();
+                .Where(u => u.Email.ToLower() == dto.Email.ToLower())
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
 
         if (user is not null)
             throw new MDCException(409,"User already exists!");
@@ -80,8 +80,8 @@ public class UserService : IUserService
 
     public async Task<UserForResultDto> RetrieveByEmailAsync(string email)
     {
-        var user = await _repository.SelectAll()
-           .Where(u => u.Email==email)
+       var user = await _repository.SelectAll()
+           .Where(u => u.Email.ToLower() == dto.Email.ToLower())
            .AsNoTracking()
            .FirstOrDefaultAsync();
 
