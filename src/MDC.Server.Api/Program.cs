@@ -1,3 +1,5 @@
+<<<<<<<<< Temporary merge branch 1
+using MDC.Server.Api.Middlewares;
 using MDC.Server.Api.Extensions;
 using MDC.Server.Data.DbContexts;
 using MDC.Server.Service.Helpers;
