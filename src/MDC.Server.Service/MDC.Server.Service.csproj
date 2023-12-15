@@ -21,4 +21,8 @@
     <ProjectReference Include="..\MDC.Server.Domain\MDC.Server.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MDC.Server.Domain\MDC.Server.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
