@@ -7,6 +7,9 @@ using MDC.Server.Domain.Configurations;
 using MDC.Server.Domain.Entities.Events;
 using MDC.Server.Service.Interfaces.Events;
 using MDC.Server.Service.Commons.Extensions;
+using Microsoft.AspNetCore.Http;
+using MDC.Server.Service.Helpers;
+using MDC.Server.Domain.Entities.Users;
 
 namespace MDC.Server.Service.Services.Events;
 
@@ -30,7 +33,23 @@ public class EventService : IEventService
         if (@event is not null)
             throw new MDCException(409, "Event is already exist");
 
-        var mapped = _mapper.Map<Event>(dto);
+       
+        var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.Banner.FileName);
+        var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "Events", fileName);
+        using (var stream = new FileStream(rootPath, FileMode.Create))
+        {
+            await dto.Banner.CopyToAsync(stream);
+            await stream.FlushAsync();
+            stream.Close();
+        }
+        string resultImage = Path.Combine("Media", "Events", fileName);
+        var mapped = new Event()
+        {
+            LocationId = dto.LocationId,
+            CreatedAt = DateTime.UtcNow
+        };
+
+        mapped.Banner = resultImage;
         var result = await _repository.InsertAsync(mapped);
 
         return _mapper.Map<EventForResultDto>(result);

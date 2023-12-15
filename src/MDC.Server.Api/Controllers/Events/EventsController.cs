@@ -17,7 +17,7 @@ namespace MDC.Server.Api.Controllers.Events
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] EventForCreationDto dto)
+        public async Task<IActionResult> PostAsync([FromForm] EventForCreationDto dto)
         => Ok(await this._eventService.CreateAsync(dto));
 
         [HttpGet]

@@ -22,4 +22,8 @@
     <ProjectReference Include="..\MDC.Server.Service\MDC.Server.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Media\" />
+  </ItemGroup>
+
 </Project>
