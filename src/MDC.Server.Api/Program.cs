@@ -1,3 +1,4 @@
+using MDC.Server.Api.Extensions;
 using MDC.Server.Data.DbContexts;
 using MDC.Server.Service.Mappings;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,8 @@ builder.Services.AddDbContext<MDCServerDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+builder.Services.AddCustomService();
 
 var app = builder.Build();
 

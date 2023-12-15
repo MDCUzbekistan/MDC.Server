@@ -1,4 +1,5 @@
-﻿using MDC.Server.Service.DTOs.EventRoles;
+﻿using MDC.Server.Domain.Configurations;
+using MDC.Server.Service.DTOs.EventRoles;
 
 namespace MDC.Server.Service.Interfaces;
 

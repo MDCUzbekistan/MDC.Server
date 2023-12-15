@@ -1,4 +1,5 @@
-﻿using MDC.Server.Service.DTOs.UserEvents;
+﻿using MDC.Server.Domain.Configurations;
+using MDC.Server.Service.DTOs.UserEvents;
 
 namespace MDC.Server.Service.Interfaces;
 

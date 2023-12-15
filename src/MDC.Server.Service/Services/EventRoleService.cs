@@ -3,9 +3,10 @@ using MDC.Server.Service.Interfaces;
 using MDC.Server.Data.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using MDC.Server.Service.Exceptions;
+using MDC.Server.Domain.Configurations;
 using MDC.Server.Domain.Entities.Events;
 using MDC.Server.Service.DTOs.EventRoles;
-using Microsoft.VisualBasic;
+using MDC.Server.Service.Commons.Extensions;
 
 namespace MDC.Server.Service.Services;
 
@@ -38,7 +39,7 @@ public class EventRoleService : IEventRoleService
         return this._mapper.Map<EventRoleForResultDto>(createdData);
     }
 
-    public async Task<EventRoleForResultDto> ModifyAsync(long id, EventRoleForUpdateDto dto)
+    public async Task<EventRoleForResultDto> ModifyAsync(short id, EventRoleForUpdateDto dto)
     {
         var data = await this._eventRoleRepository
             .SelectAll()
@@ -49,8 +50,8 @@ public class EventRoleService : IEventRoleService
 
         var mappedData = this._mapper.Map(dto, data);
         mappedData.UpdatedAt = DateTime.UtcNow;
-        await this._eventRoleRepository.InsertAsync(mappedData);
-        return this._mapper.Map < EventRoleForResultDto>(mappedData);
+        await this._eventRoleRepository.UpdateAsync(mappedData);
+        return this._mapper.Map<EventRoleForResultDto>(mappedData);
     }
 
     public async Task<bool> RemoveAsync(short id)
@@ -74,12 +75,19 @@ public class EventRoleService : IEventRoleService
         if(data is null)
             throw new MDCException(404,"EventRoles are not found");
 
-        return this._mapper.Map<EventRoleForResultDto>(data);
+        return this._mapper.Map<IEnumerable<EventRoleForResultDto>>(data);
     }
 
-    public Task<EventRoleForResultDto> RetrieveByIdAsync(long id)
+    public async Task<EventRoleForResultDto> RetrieveByIdAsync(short id)
     {
+        var data = await this._eventRoleRepository
+            .SelectAll()
+            .Where(e => e.Id == id)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
+        if(data is null)
+            throw new MDCException(404,"EventRole is not found");
 
-        throw new NotImplementedException();
+        return this._mapper.Map<EventRoleForResultDto>(data);
     }
 }

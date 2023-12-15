@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using MDC.Server.Data.IRepositories;
 using MDC.Server.Service.Exceptions;
 using MDC.Server.Domain.Entities.Users;
+using MDC.Server.Domain.Configurations;
 using MDC.Server.Service.DTOs.UserEvents;
+using MDC.Server.Service.Commons.Extensions;
 
 namespace MDC.Server.Service.Services;
 
@@ -72,6 +74,7 @@ public class UserEventService : IUserEventService
             .Include(u => u.Event)
             .Include(u => u.Role)
             .AsNoTracking()
+            .ToPagedList(@params)
             .ToListAsync();
         if(data is null)
             throw new MDCException(404,"Data are not found");
