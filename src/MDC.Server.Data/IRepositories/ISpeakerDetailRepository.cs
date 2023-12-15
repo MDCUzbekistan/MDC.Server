@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MDC.Server.Domain.Entities.Users;
 
 namespace MDC.Server.Data.IRepositories
 {
-    public interface ISpeakerDetailRepository
+    public interface ISpeakerDetailRepositor : IRepository<SpeakerDetail, long>
     {
     }
 }

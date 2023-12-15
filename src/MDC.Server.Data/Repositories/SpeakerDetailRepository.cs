@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MDC.Server.Data.DbContexts;
+using MDC.Server.Domain.Entities.Users;
 
 namespace MDC.Server.Data.Repositories
 {
-    internal class SpeakerDetailRepository
+    public class SpeakerDetailRepository : Repository<SpeakerDetail, long>
     {
+        public SpeakerDetailRepository(MDCServerDbContext dbContext) 
+               : base(dbContext) { }
     }
 }
