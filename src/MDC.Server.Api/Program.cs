@@ -1,4 +1,5 @@
 using MDC.Server.Api.Extensions;
+using MDC.Server.Api.Middlewares;
 using MDC.Server.Data.DbContexts;
 using MDC.Server.Service.Helpers;
 using MDC.Server.Service.Mappers;
@@ -26,6 +27,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<ExceptionHandlerMiddleWare>();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
