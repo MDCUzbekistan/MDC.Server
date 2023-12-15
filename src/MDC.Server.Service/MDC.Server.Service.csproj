@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MDC.Server.Data\MDC.Server.Data.csproj" />
     <ProjectReference Include="..\MDC.Server.Domain\MDC.Server.Domain.csproj" />
   </ItemGroup>
 
