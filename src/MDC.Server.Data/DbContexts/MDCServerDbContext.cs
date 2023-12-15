@@ -23,5 +23,55 @@ namespace MDC.Server.Data.DbContexts
         public DbSet<SpeakerDetail> SpeakerDetails { get; set; }
         public DbSet<CommunityRole> CommunityRoles { get; set; }
         public DbSet<UserCommunity> UserCommunities { get; set; }
+
+        protected override void OnModelCreating (ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+            .HasOne(u => u.UserDetail)
+            .WithOne(ud => ud.User)
+            .HasForeignKey<UserDetail>(ud => ud.UserId);
+
+            // User - UserLanguage
+
+            modelBuilder.Entity<UserLanguage>()
+                .HasOne(ul => ul.User)
+                .WithMany(l => l.Languages)
+                .HasForeignKey(ul => ul.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // User - UserEvent
+
+            modelBuilder.Entity<UserEvent>()
+                .HasOne(ue => ue.User)
+                .WithMany(u => u.Events)
+                .HasForeignKey(ue => ue.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            // User - UserCommunity
+
+            modelBuilder.Entity<UserCommunity>()
+                .HasOne(uc => uc.User)
+                .WithMany(u => u.Communities)
+                .HasForeignKey(uc => uc.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Event
+           
+            modelBuilder.Entity<Event>()
+                .HasMany(e => e.Sessions)
+                .WithOne(es => es.Event)
+                .HasForeignKey(es => es.EventId);
+
+            // User - Detail
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.UserDetail)
+                .WithOne(ud => ud.User)
+                .HasForeignKey<UserDetail>(ud => ud.UserId);
+
+          
+
+        }
     }
 }

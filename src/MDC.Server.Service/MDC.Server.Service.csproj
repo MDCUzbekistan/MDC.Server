@@ -3,11 +3,25 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+<<<<<<< HEAD
+=======
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MDC.Server.Domain\MDC.Server.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MDC.Server.Data\MDC.Server.Data.csproj" />
+    <ProjectReference Include="..\MDC.Server.Domain\MDC.Server.Domain.csproj" />
+>>>>>>> 93938f27e57f27554ffe3a8504c55fd4a45dd8eb
   </ItemGroup>
 
 </Project>
