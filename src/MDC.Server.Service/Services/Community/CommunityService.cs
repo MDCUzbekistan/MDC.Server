@@ -41,6 +41,7 @@ public class CommunityService : ICommunityService
         }
 
         var mappedComunity = _mapper.Map<Community>(communityDto);
+        mappedComunity.CreatedAt = DateTime.UtcNow;
         var createCommunity = await _communityRepository.InsertAsync(mappedComunity);
         
         return _mapper.Map<CommunityForResultDto>(createCommunity);
@@ -102,6 +103,7 @@ public class CommunityService : ICommunityService
         }
 
         var mappedCommunity = _mapper.Map<Community>(Update);
+        mappedCommunity.UpdatedAt = DateTime.UtcNow;
         var updateCommunity = await _communityRepository.UpdateAsync(mappedCommunity);
         return _mapper.Map<CommunityForResultDto>(updateCommunity);
     }
