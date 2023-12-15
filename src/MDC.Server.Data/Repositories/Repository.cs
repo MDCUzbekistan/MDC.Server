@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MDC.Server.Data.Repositories;
 
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditable<TEntity>
+public class Repository<TEntity, TKey> : IRepository<TEntity,TKey> where TEntity : Auditable<TKey>
 {
     protected readonly MDCServerDbContext _dbContext;
     protected readonly DbSet<TEntity> _dbSet;
@@ -27,9 +27,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
     }
 
 
-    public async Task<bool> DeleteAsync(TEntity id)
+    public async Task<bool> DeleteAsync(TKey id)
     {
-        var entity = await _dbSet.FirstOrDefaultAsync(e => e.Id == id);
+        var entity = await _dbSet.FirstOrDefaultAsync(e => e.Id.Equals(id));
         _dbSet.Remove(entity);
 
         return await _dbContext.SaveChangesAsync() > 0;
@@ -39,8 +39,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
     public IQueryable<TEntity> SelectAll()
         => _dbSet;
 
-    public async Task<TEntity> SelectByIdAsync(TEntity id)
-        => await _dbSet.FirstOrDefaultAsync(e => e.Id == id);
+    public async Task<TEntity> SelectByIdAsync(TKey id)
+        => await _dbSet.FirstOrDefaultAsync(e => e.Id.Equals(id));
 
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
