@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MDC.Server.Data\MDC.Server.Data.csproj" />
     <ProjectReference Include="..\MDC.Server.Service\MDC.Server.Service.csproj" />
   </ItemGroup>
