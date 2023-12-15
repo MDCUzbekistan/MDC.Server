@@ -9,7 +9,7 @@ namespace MDC.Server.Service.Commons.Extensions;
 public static class CollectionExtensions
 {
     public static IQueryable<TEntity> ToPagedList<TEntity>(this IQueryable<TEntity> source, PaginationParams @params)
-            where TEntity : Auditable<TEntity>
+            where TEntity : Auditable<long>
     {
 
         var metaData = new PaginationMetaData(source.Count(), @params);
@@ -29,6 +29,8 @@ public static class CollectionExtensions
             .Skip((@params.PageIndex - 1) * @params.PageSize).Take(@params.PageSize)
             : throw new MDCException(400, "Please, enter valid numbers");
     }
+
+
 
     public static IEnumerable<TEntity> ToPagedList<TEntity>(this IEnumerable<TEntity> source, PaginationParams @params)
     {
