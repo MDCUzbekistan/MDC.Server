@@ -22,6 +22,6 @@ namespace MDC.Server.Data.DbContexts
         public DbSet<UserLanguage> UserLanguages { get; set; }
         public DbSet<SpeakerDetail> SpeakerDetails { get; set; }
         public DbSet<CommunityRole> CommunityRoles { get; set; }
-        public DbSet<Domain.Entities.Communities.UserCommunity> UserCommunities { get; set; }
+        public DbSet<UserCommunity> UserCommunities { get; set; }
     }
 }
