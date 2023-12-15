@@ -24,4 +24,8 @@
 >>>>>>> 93938f27e57f27554ffe3a8504c55fd4a45dd8eb
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MDC.Server.Domain\MDC.Server.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
