@@ -1,3 +1,4 @@
+using MDC.Server.Api.Extensions;
 using MDC.Server.Data.DbContexts;
 using MDC.Server.Service.Mappings;
 using Microsoft.EntityFrameworkCore;
