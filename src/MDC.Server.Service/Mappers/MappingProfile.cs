@@ -2,7 +2,7 @@
 using MDC.Server.Domain.Entities.Events;
 using MDC.Server.Service.DTOs.Events;
 
-namespace MDC.Server.Service.Mappings;
+namespace MDC.Server.Service.Mappers;
 
 public class MappingProfile : Profile
 {

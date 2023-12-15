@@ -29,7 +29,7 @@ namespace MDC.Server.Api.Controllers.Events
             => Ok(await this._eventService.RetrieveByIdAsync(id));
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] EventForUpdateDto dto)
+        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromForm] EventForUpdateDto dto)
             => Ok(await this._eventService.ModifyAsync(id, dto));
 
         [HttpDelete("{id}")]

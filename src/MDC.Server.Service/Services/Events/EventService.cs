@@ -43,14 +43,11 @@ public class EventService : IEventService
             stream.Close();
         }
         string resultImage = Path.Combine("Media", "Events", fileName);
-        var mapped = new Event()
-        {
-            LocationId = dto.LocationId,
-            CreatedAt = DateTime.UtcNow
-        };
-
-        mapped.Banner = resultImage;
-        var result = await _repository.InsertAsync(mapped);
+       
+        
+        var MappedData = this._mapper.Map<Event>(dto);
+        MappedData.Banner = resultImage;
+        var result = await _repository.InsertAsync(MappedData);
 
         return _mapper.Map<EventForResultDto>(result);
     }
@@ -64,8 +61,27 @@ public class EventService : IEventService
         if (@event is null)
             throw new MDCException(404, "Event is not found");
 
+        var fullPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, @event.Banner);
+
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+        }
+
+
+        var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.Banner.FileName);
+        var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "Events", fileName);
+        using (var stream = new FileStream(rootPath, FileMode.Create))
+        {
+            await dto.Banner.CopyToAsync(stream);
+            await stream.FlushAsync();
+            stream.Close();
+        }
+        string resultImage = Path.Combine("Media", "Events", fileName);
+
         var mapped = _mapper.Map(dto, @event);
         mapped.UpdatedAt = DateTime.UtcNow;
+        mapped.Banner = resultImage;
 
         var result = await _repository.UpdateAsync(mapped);
 
@@ -80,6 +96,13 @@ public class EventService : IEventService
 
         if (@event is null)
             throw new MDCException(404, "Event is not found");
+
+        var fullPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, @event.Banner);
+
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+        }
 
         return await _repository.DeleteAsync(id);
     }
