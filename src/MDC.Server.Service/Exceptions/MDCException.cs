@@ -6,6 +6,6 @@ public class MDCException:Exception
     public int StatusCode { get; set; }
     public MDCException(int code,string message):base(message)
     {
-        StatusCode=code
+        StatusCode = code;
     }
 }
