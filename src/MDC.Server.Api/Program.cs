@@ -1,3 +1,4 @@
+using MDC.Server.Api.Middlewares;
 using MDC.Server.Data.DbContexts;
 using MDC.Server.Service.Mappings;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<ExceptionHandlerMiddleWare>();
 
 app.UseHttpsRedirection();
 
