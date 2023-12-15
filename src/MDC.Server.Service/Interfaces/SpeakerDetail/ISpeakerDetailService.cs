@@ -5,11 +5,9 @@ namespace MDC.Server.Service.Interfaces.SpeakerDetail
     public interface ISpeakerDetailService
     {
         Task<bool> RemoveAsync(long id);
-        IQueryable<SpeakerDetailForResultDto> GetAll();
         Task<SpeakerDetailForResultDto> RetrieveByIdAsync (long id);
-        Task<SpeakerDetailForResultDto> AddAsync (SpeakerDetailForResultDto dto);
-        Task<SpeakerDetailForResultDto> ModifyAsync (SpeakerDetailForUpdateDto dto);
-
-
+        Task<IEnumerable<SpeakerDetailForResultDto>> SelectAllAsync();
+        Task<SpeakerDetailForResultDto> AddAsync (SpeakerDetailForCreationDto dto);
+        Task<SpeakerDetailForResultDto> ModifyAsync (long id, SpeakerDetailForUpdateDto dto);
     }
 }
