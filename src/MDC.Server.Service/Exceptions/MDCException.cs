@@ -1,5 +1,4 @@
-﻿
-namespace MDC.Server.Service.Exceptions;
+﻿namespace MDC.Server.Service.Exceptions;
 
 public class MDCException:Exception
 {
