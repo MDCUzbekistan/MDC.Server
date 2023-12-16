@@ -19,7 +19,7 @@ namespace MDC.Server.Domain.Entities.Users
         public DateTime? DateOfBirth { get; set; }
 
         public UserDetail UserDetail { get; set; }
-        
+
         public ICollection<UserCommunity> Communities { get; set; }
         public ICollection<UserEvent> Events { get; set; }
     }
