@@ -14,7 +14,6 @@ public static class ServiceExtension
 {
     public static void AddCustomService(this IServiceCollection services)
     {
-        // AutoMapper
         services.AddAutoMapper(typeof(MappingProfile));
 
         // Generic Repository
@@ -27,6 +26,5 @@ public static class ServiceExtension
         //Language
         services.AddScoped<ILanguageService, LanguageService>();
         services.AddScoped<ILanguageRepository, LanguageRepository>();
-
     }
 }

@@ -1,7 +1,9 @@
 using MDC.Server.Api.Extensions;
+using MDC.Server.Data.DbContexts;
 using MDC.Server.Api.Middlewares;
 using MDC.Server.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
+using MDC.Server.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
