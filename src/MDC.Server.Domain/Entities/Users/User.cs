@@ -14,7 +14,7 @@ namespace MDC.Server.Domain.Entities.Users
 
         public UserDetail UserDetail { get; set; }
 
-        public ICollection<UserCommunity> Communities { get; set; }
+        public ICollection<UserCommunity> UserCommunities { get; set; }
         public ICollection<UserEvent> Events { get; set; }
         public ICollection<UserLanguage> Languages { get; set; }    
     }

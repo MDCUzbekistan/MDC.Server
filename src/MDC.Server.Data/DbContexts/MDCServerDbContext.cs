@@ -50,7 +50,7 @@ namespace MDC.Server.Data.DbContexts
             // User - UserCommunity
             modelBuilder.Entity<UserCommunity>()
                 .HasOne(uc => uc.User)
-                .WithMany(u => u.Communities)
+                .WithMany(u => u.UserCommunities)
                 .HasForeignKey(uc => uc.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
