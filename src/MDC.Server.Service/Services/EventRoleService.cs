@@ -6,18 +6,17 @@ using MDC.Server.Service.Exceptions;
 using MDC.Server.Domain.Configurations;
 using MDC.Server.Domain.Entities.Events;
 using MDC.Server.Service.DTOs.EventRoles;
-using MDC.Server.Service.Commons.Extensions;
 
 namespace MDC.Server.Service.Services;
 
 public class EventRoleService : IEventRoleService
 {
     private readonly IMapper _mapper;
-    private readonly IRepository<EventRole, short> _eventRoleRepository;
+    private readonly IEventRoleRepository _eventRoleRepository;
 
     public EventRoleService(
         IMapper mapper,
-        IRepository<EventRole, short> eventRoleRepository)
+        IEventRoleRepository eventRoleRepository)
     {
         this._mapper = mapper;
         this._eventRoleRepository = eventRoleRepository;
@@ -28,13 +27,13 @@ public class EventRoleService : IEventRoleService
         var data = await this._eventRoleRepository
             .SelectAll()
             .Where(e => e.Name.ToLower() == dto.Name.ToLower())
-            .AsNoTracking()
             .FirstOrDefaultAsync();
         if(data is not null)
             throw new MDCException(409,"EventRole is already exist");
 
-        var createdData = await this._eventRoleRepository.InsertAsync(this._mapper.Map<EventRole>(dto));
-        createdData.CreatedAt = DateTime.UtcNow;
+        var mappedData = this._mapper.Map<EventRole>(dto);
+        mappedData.CreatedAt = DateTime.UtcNow;
+        var createdData = await this._eventRoleRepository.InsertAsync(mappedData);
 
         return this._mapper.Map<EventRoleForResultDto>(createdData);
     }
@@ -44,6 +43,7 @@ public class EventRoleService : IEventRoleService
         var data = await this._eventRoleRepository
             .SelectAll()
             .Where(e => e.Id == id)
+            .AsNoTracking()
             .FirstOrDefaultAsync();
         if(data is null)
             throw new MDCException(404,"EventRole is not found");
@@ -72,8 +72,6 @@ public class EventRoleService : IEventRoleService
             .SelectAll()
             .AsNoTracking()
             .ToListAsync();
-        if(data is null)
-            throw new MDCException(404,"EventRoles are not found");
 
         return this._mapper.Map<IEnumerable<EventRoleForResultDto>>(data);
     }

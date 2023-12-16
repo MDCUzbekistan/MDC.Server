@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MDC.Server.Service.DTOs.Users;
 using MDC.Server.Domain.Entities.Users;
 using MDC.Server.Domain.Entities.Events;
 using MDC.Server.Service.DTOs.EventRoles;
@@ -19,5 +20,11 @@ public class MappingProfile : Profile
         CreateMap<EventRole, EventRoleForResultDto>().ReverseMap();
         CreateMap<EventRole, EventRoleForUpdateDto>().ReverseMap();
         CreateMap<EventRole, EventRoleForCreationDto>().ReverseMap();
+
+        #region
+        CreateMap<User, UserForCreationDto>().ReverseMap();
+        CreateMap<User, UserForUpdateDto>().ReverseMap();
+        CreateMap<User, UserForResultDto>().ReverseMap();
+        #endregion
     }
 }

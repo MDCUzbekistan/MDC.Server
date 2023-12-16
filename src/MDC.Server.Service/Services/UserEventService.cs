@@ -13,28 +13,54 @@ namespace MDC.Server.Service.Services;
 public class UserEventService : IUserEventService
 {
     private readonly IMapper _mapper;
-    private readonly IRepository<UserEvent, long> _userEventRepository;
+    private readonly IUserRepository _userRepository;
+    private readonly IEventRepository _eventRepository;
+    private readonly IEventRoleRepository _eventRoleRepository;
+    private readonly IUserEventRepository _userEventRepository;
 
     public UserEventService(
         IMapper mapper,
-        IRepository<UserEvent, long> userEventRepository)
+        IUserRepository userRepository,
+        IEventRepository eventRepository,
+        IEventRoleRepository eventRoleRepository,
+        IUserEventRepository userEventRepository)
     {
         this._mapper = mapper;
+        this._userRepository = userRepository;
+        this._eventRepository = eventRepository;
+        this._eventRoleRepository = eventRoleRepository;
         this._userEventRepository = userEventRepository;
     }
 
     public async Task<UserEventForResultDto> AddAsync(UserEventForCreationDto dto)
     {
-        var data = this._userEventRepository
+        var userData = await this._userEventRepository
             .SelectAll()
-            .Where(u => u.UserId == dto.UserId && u.EventId == dto.EventId && u.RoleId == dto.RoleId)
+            .Where(u => u.Id == dto.UserId)
             .AsNoTracking()
             .FirstOrDefaultAsync();
-        if(data is not null)
-            throw new MDCException(409, "UserEvent is already exist");
+        if (userData is null)
+            throw new MDCException(404, "User is not found");
 
-        var createdData = await this._userEventRepository.InsertAsync(this._mapper.Map<UserEvent>(dto));
-        createdData.CreatedAt = DateTime.UtcNow;
+        var evetData = await this._eventRepository
+             .SelectAll()
+             .Where(e => e.Id == dto.EventId)
+             .AsNoTracking()
+             .FirstOrDefaultAsync();
+        if (evetData is null)
+            throw new MDCException(404, "Event is not found");
+
+        var eventRoleData = await this._eventRoleRepository
+            .SelectAll()
+            .Where(e => e.Id == dto.RoleId)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
+        if (eventRoleData is null)
+            throw new MDCException(404, "Role is not found");
+
+        var mappedData = this._mapper.Map<UserEvent>(dto);
+        mappedData.CreatedAt = DateTime.UtcNow;
+        var createdData = await this._userEventRepository.InsertAsync(mappedData);
 
         return this._mapper.Map<UserEventForResultDto>(createdData);
     }
@@ -44,9 +70,34 @@ public class UserEventService : IUserEventService
         var data = await this._userEventRepository
             .SelectAll()
             .Where(u => u.Id == id)
+            .AsNoTracking()
             .FirstOrDefaultAsync();
         if(data is null)
             throw new MDCException(404,"UserEvent is not found");
+
+        var user = await this._userEventRepository
+            .SelectAll()
+            .Where(u => u.Id == dto.UserId)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
+        if (user is null)
+            throw new MDCException(404, "User is not found");
+
+        var evetData = await this._eventRepository
+             .SelectAll()
+             .Where(e => e.Id == dto.EventId)
+             .AsNoTracking()
+             .FirstOrDefaultAsync();
+        if (evetData is null)
+            throw new MDCException(404, "Event is not found");
+
+        var eventRoleData = await this._eventRoleRepository
+            .SelectAll()
+            .Where(e => e.Id == dto.RoleId)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
+        if (eventRoleData is null)
+            throw new MDCException(404, "Role is not found");
 
         var mappedData = this._mapper.Map(dto, data);
         mappedData.UpdatedAt = DateTime.UtcNow; 
@@ -63,6 +114,7 @@ public class UserEventService : IUserEventService
             .FirstOrDefaultAsync(); 
         if(data is null)
             throw new MDCException(404,"UserEvent is not found");
+
         return await this._userEventRepository.DeleteAsync(id);
     }
 

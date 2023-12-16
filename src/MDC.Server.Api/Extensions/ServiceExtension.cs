@@ -14,6 +14,9 @@ public static class ServiceExtension
         services.AddAutoMapper(typeof(MappingProfile));
 
         // Repository
+        services.AddScoped<IEventRepository, EventRepository>();
+        services.AddScoped<IUserEventRepository, UserEventRepository>();
+        services.AddScoped<IEventRoleRepository, EventRoleRepository>();
         services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 
         //Services
