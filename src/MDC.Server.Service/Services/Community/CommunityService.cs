@@ -36,7 +36,7 @@ public  class CommunityService : ICommunityService
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
 
-            if (subCommunity is null)
+            if (subCommunity is null )
                 throw new MDCException(404, "SubComunity is not found");
         }
 
