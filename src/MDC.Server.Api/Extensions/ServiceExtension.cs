@@ -7,8 +7,8 @@ using MDC.Server.Service.Interfaces.Languages;
 using MDC.Server.Service.Interfaces.Users;
 using MDC.Server.Service.Mappings;
 using MDC.Server.Service.Services;
-using MDC.Server.Service.Services.Languages;
 using MDC.Server.Service.Services.Users;
+using MDC.Server.Service.Services.Languages;
 
 namespace MDC.Server.Api.Extensions;
 
