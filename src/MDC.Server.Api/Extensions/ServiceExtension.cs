@@ -10,7 +10,6 @@ public static class ServiceExtension
 {
     public static void AddCustomService(this IServiceCollection services)
     {
-        // AutoMapper
         services.AddAutoMapper(typeof(MappingProfile));
 
         // UserDetail
@@ -18,5 +17,6 @@ public static class ServiceExtension
         services.AddScoped<IUserDetailService, UserDetailService>();
 
         services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+
     }
 }
