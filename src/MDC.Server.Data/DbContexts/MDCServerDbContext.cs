@@ -54,13 +54,6 @@ namespace MDC.Server.Data.DbContexts
                 .HasForeignKey(uc => uc.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // User - Detail
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.UserDetail)
-                .WithOne(ud => ud.User)
-                .HasForeignKey<UserDetail>(ud => ud.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
             // Event
             modelBuilder.Entity<Event>()
                 .HasMany(e => e.Sessions)
@@ -69,7 +62,11 @@ namespace MDC.Server.Data.DbContexts
                 .OnDelete(DeleteBehavior.Cascade);
 
             //Comunity and UserComunity
-            modelBuilder.Entity<UserCommunity>();
+            modelBuilder.Entity<UserCommunity>()
+                .HasOne(uc => uc.Community)
+                .WithMany(c => c.UserCommunities)
+                .HasForeignKey(uc => uc.CommunityId)
+                .OnDelete(DeleteBehavior.Cascade);
                 
         }
     }
