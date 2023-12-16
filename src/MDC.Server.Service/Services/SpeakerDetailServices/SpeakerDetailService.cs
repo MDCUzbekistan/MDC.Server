@@ -5,12 +5,13 @@ using MDC.Server.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using MDC.Server.Domain.Entities.Users;
 using MDC.Server.Service.DTOs.SpeakerDetails;
-using MDC.Server.Service.Interfaces.SpeakerDetail;
+using MDC.Server.Service.Interfaces.SpeakerDetails;
 
 namespace MDC.Server.Service.Services.SpeakerDetailServices
 {
     public class SpeakerDetailService : ISpeakerDetailService
     {
+        #region
         private readonly IMapper _mapper;
         private readonly IRepository<SpeakerDetail, long> _speakerDetailRepository;
 
@@ -19,6 +20,36 @@ namespace MDC.Server.Service.Services.SpeakerDetailServices
             _mapper = mapper;
             _speakerDetailRepository = speakerDetailRepository;
         }
+
+        public async Task<bool> RemoveAsync(long id)
+        {
+            var removeSpeaker = _speakerDetailRepository.SelectAll()
+                 .Where(s => s.Id == id)
+                 .FirstOrDefaultAsync() ??
+                    throw new MDCException(404, "Speaker is not found! ");
+
+            await _speakerDetailRepository.DeleteAsync(id);
+            return true;
+        }
+
+        public async Task<SpeakerDetailForResultDto> RetrieveByIdAsync(long id)
+        {
+            var byIdSpeaker = await _speakerDetailRepository.SelectAll()
+                 .Where(s => s.Id == id)
+                 .FirstOrDefaultAsync() ??
+                     throw new MDCException(404, "Speaker is not found!");
+
+            return _mapper.Map<SpeakerDetailForResultDto>(byIdSpeaker);
+        }
+
+
+        public async Task<IEnumerable<SpeakerDetailForResultDto>> RetrieveAllAsync()
+        {
+           var allSpeaker = await _speakerDetailRepository.SelectAll()
+                .ToListAsync();
+            return _mapper.Map <IEnumerable<SpeakerDetailForResultDto>> (allSpeaker);
+        }
+
 
         public async Task<SpeakerDetailForResultDto> AddAsync(SpeakerDetailForCreationDto dto)
         {
@@ -50,33 +81,6 @@ namespace MDC.Server.Service.Services.SpeakerDetailServices
             await _speakerDetailRepository.UpdateAsync(upSpeaker);
             return _mapper.Map<SpeakerDetailForResultDto>(upSpeaker);
         }
-
-        public async Task<bool> RemoveAsync(long id)
-        {
-            var removeSpeaker = _speakerDetailRepository.SelectAll()
-                 .Where(s => s.Id == id)
-                 .FirstOrDefaultAsync() ??
-                    throw new MDCException(404, "Speaker is not found! ");
-
-            await _speakerDetailRepository.DeleteAsync(id);
-            return true;
-        }
-
-        public async Task<SpeakerDetailForResultDto> RetrieveByIdAsync(long id)
-        {
-            var byIdSpeaker = await _speakerDetailRepository.SelectAll()
-                 .Where(s => s.Id == id)
-                 .FirstOrDefaultAsync() ??
-                     throw new MDCException(404, "Speaker is not found!");
-
-            return _mapper.Map<SpeakerDetailForResultDto>(byIdSpeaker);
-        }
-
-        public async Task<IEnumerable<SpeakerDetailForResultDto>> SelectAllAsync()
-        {
-           var allSpeaker = await _speakerDetailRepository.SelectAll()
-                .ToListAsync();
-            return _mapper.Map <IEnumerable<SpeakerDetailForResultDto>> (allSpeaker);
-        }
+        #endregion
     }
 }

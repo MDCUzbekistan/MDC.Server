@@ -17,5 +17,11 @@ public class MappingProfile : Profile
         CreateMap<User, UserForResultDto>().ReverseMap();
         #endregion
 
+        // SpeakerDetail
+        CreateMap<SpeakerDetail, SpeakerDetailForCreationDto>().ReverseMap();
+        CreateMap<SpeakerDetail, SpeakerDetailForUpdateDto>().ReverseMap();
+        CreateMap<SpeakerDetail, SpeakerDetailForResultDto>().ReverseMap();
+
+
     }
 }

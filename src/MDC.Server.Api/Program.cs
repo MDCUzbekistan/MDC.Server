@@ -2,8 +2,10 @@ using MDC.Server.Api.Middlewares;
 using MDC.Server.Data.DbContexts;
 using MDC.Server.Data.IRepositories;
 using MDC.Server.Data.Repositories;
+using MDC.Server.Service.Interfaces.SpeakerDetails;
 using MDC.Server.Service.Interfaces.Users;
 using MDC.Server.Service.Mappings;
+using MDC.Server.Service.Services.SpeakerDetailServices;
 using MDC.Server.Service.Services.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +23,8 @@ builder.Services.AddDbContext<MDCServerDbContext>(options =>
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ISpeakerDetailRepositor, SpeakerDetailRepository>();
+builder.Services.AddScoped<ISpeakerDetailService, SpeakerDetailService>();
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 
 var app = builder.Build();
