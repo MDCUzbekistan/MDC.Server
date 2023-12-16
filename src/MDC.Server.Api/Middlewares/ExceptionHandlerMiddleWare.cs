@@ -6,10 +6,11 @@ namespace MDC.Server.Api.Middlewares
     public class ExceptionHandlerMiddleWare
     {
         private readonly RequestDelegate _next;
-
-        public ExceptionHandlerMiddleWare(RequestDelegate next)
+        private readonly ILogger _logger;
+        public ExceptionHandlerMiddleWare(RequestDelegate next, ILogger<ExceptionHandlerMiddleWare> logger)
         {
             _next = next;
+            _logger = logger;
         }
          
         public async Task Invoke(HttpContext context)
@@ -29,6 +30,7 @@ namespace MDC.Server.Api.Middlewares
             }
             catch (Exception ex)
             {
+                _logger.LogError($"{ex}\n\n");
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsJsonAsync(new Response
                 {
