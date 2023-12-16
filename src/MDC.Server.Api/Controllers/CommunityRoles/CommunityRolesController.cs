@@ -17,23 +17,20 @@ public class CommunityRolesController : BaseController
     public async Task<IActionResult> PostAsync([FromBody] CommunityRoleForCreationDto dto)
         => Ok(await this._communityRoleService.CreateAsync(dto));
 
-    //GetAll
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
         => Ok(await this._communityRoleService.RetrieveAllAsync());
 
-    //GetById
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] short id)
         => Ok(await this._communityRoleService.RetrieveByIdAsync(id));
 
 
-    //Delete
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] short id)
         => Ok(await this._communityRoleService.RemoveAsync(id));
 
-    //Update
+
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] short id, [FromBody] CommunityRoleForUpdateDto dto)
         => Ok(await this._communityRoleService.ModifyAsync(id, dto));
