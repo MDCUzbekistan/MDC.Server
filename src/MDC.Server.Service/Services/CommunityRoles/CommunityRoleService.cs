@@ -14,8 +14,8 @@ namespace MDC.Server.Service.Services.CommunityRoles;
 public class CommunityRoleService : ICommunityRoleService
 {
     private readonly IMapper _mapper;
-    private readonly IRepository<CommunityRole, short> _repository;
-    public CommunityRoleService(IMapper mapper, IRepository<CommunityRole, short> repository)
+    private readonly ICommunityRoleRepository _repository;
+    public CommunityRoleService(IMapper mapper, ICommunityRoleRepository repository)
     {
         _mapper = mapper;
         _repository = repository;
@@ -25,6 +25,7 @@ public class CommunityRoleService : ICommunityRoleService
     {
         var communityRole = await _repository.SelectAll()
             .Where(cr => cr.Name.ToLower() == dto.Name.ToLower())
+            .AsNoTracking()
             .FirstOrDefaultAsync();
         if (communityRole is not null)
             throw new MDCException(409, "CommunityRole is already exist.");
