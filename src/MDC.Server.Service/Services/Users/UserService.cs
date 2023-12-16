@@ -10,19 +10,19 @@ using System.Runtime.Serialization;
 namespace MDC.Server.Service.Services.Users;
 public class UserService : IUserService
 {
-    private readonly IUserRepository _repository;
+    private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
     public UserService(IUserRepository repository, IMapper mapper)
     {
-        _repository = repository;
+        _userRepository = repository;
         _mapper = mapper;
     }
 
 
     public async Task<UserForResultDto> AddAsync(UserForCreationDto dto)
     {
-        var user = await _repository.SelectAll()
+        var user = await _userRepository.SelectAll()
                 .Where(u => u.Email.ToLower() == dto.Email.ToLower())
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -33,13 +33,13 @@ public class UserService : IUserService
         var mapped = _mapper.Map<User>(dto);
         mapped.CreatedAt = DateTime.UtcNow;
 
-        var result = await _repository.InsertAsync(mapped);
+        var result = await _userRepository.InsertAsync(mapped);
        return _mapper.Map<UserForResultDto>(result);
     }
 
     public async Task<bool> DeleteAsync(long id)
     {
-        var user = await _repository.SelectAll()
+        var user = await _userRepository.SelectAll()
             .Where(u => u.Id==id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
@@ -47,14 +47,14 @@ public class UserService : IUserService
         if (user is null)
             throw new MDCException(404, "User is not found!");
 
-        await _repository.DeleteAsync(id);
+        await _userRepository.DeleteAsync(id);
 
         return true;
     }
 
     public async Task<UserForResultDto> ModifyAsync(long id, UserForUpdateDto dto)
     {
-        var user = await _repository.SelectAll()
+        var user = await _userRepository.SelectAll()
             .Where(u => u.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
@@ -65,14 +65,14 @@ public class UserService : IUserService
         var mapped = _mapper.Map(dto, user);
         mapped.UpdatedAt = DateTime.UtcNow;
 
-        await _repository.UpdateAsync(mapped);
+        await _userRepository.UpdateAsync(mapped);
 
         return _mapper.Map<UserForResultDto>(mapped);
     }
 
     public async Task<IEnumerable<UserForResultDto>> RetrieveAllAsync()
     {
-        var users = await _repository.SelectAll()
+        var users = await _userRepository.SelectAll()
              .ToListAsync();
 
         return _mapper.Map<IEnumerable<UserForResultDto>>(users);
@@ -80,8 +80,8 @@ public class UserService : IUserService
 
     public async Task<UserForResultDto> RetrieveByEmailAsync(string email)
     {
-       var user = await _repository.SelectAll()
-           .Where(u => u.Email.ToLower() == dto.Email.ToLower())
+       var user = await _userRepository.SelectAll()
+           .Where(u => u.Email.ToLower() == email.ToLower())
            .AsNoTracking()
            .FirstOrDefaultAsync();
 
@@ -93,7 +93,7 @@ public class UserService : IUserService
 
     public async Task<UserForResultDto> RetrieveByIdAsync(long id)
     {
-        var user = await _repository.SelectAll()
+        var user = await _userRepository.SelectAll()
             .Where(u => u.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
