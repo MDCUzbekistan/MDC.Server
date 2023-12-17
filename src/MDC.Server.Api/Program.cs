@@ -4,6 +4,8 @@ using MDC.Server.Api.Middlewares;
 using MDC.Server.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using MDC.Server.Api.Extensions;
+using MDC.Server.Api.Models;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,13 @@ builder.Services.AddDbContext<MDCServerDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCustomService();
+
+//Configure api url name
+builder.Services.AddControllers(options =>
+{
+    options.Conventions.Add(new RouteTokenTransformerConvention(
+                                        new ConfigurationApiUrlName()));
+});
 
 var app = builder.Build();
 
