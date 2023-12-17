@@ -1,3 +1,5 @@
+using MDC.Server.Api.Extensions;
+using MDC.Server.Data.DbContexts;
 using MDC.Server.Data.DbContexts;
 
 <<<<<<<<< Temporary merge branch 1
@@ -7,19 +9,24 @@ using MDC.Server.Data.DbContexts;
 using MDC.Server.Service.Helpers;
 using MDC.Server.Service.Mappers;
 using Microsoft.EntityFrameworkCore;
+using MDC.Server.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<MDCServerDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
 builder.Services.AddCustomService();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<MDCServerDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 WebHostEnviromentHelper.WebRootPath = Path.GetFullPath("wwwroot");
