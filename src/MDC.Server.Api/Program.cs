@@ -8,6 +8,8 @@ using MDC.Server.Service.Helpers;
 using MDC.Server.Service.Mappers;
 using Microsoft.EntityFrameworkCore;
 using MDC.Server.Api.Extensions;
+using MDC.Server.Api.Models;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,13 @@ builder.Services.AddDbContext<MDCServerDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+//Configure api url name
+builder.Services.AddControllers(options =>
+{
+    options.Conventions.Add(new RouteTokenTransformerConvention(
+                                        new ConfigurationApiUrlName()));
+});
 
 var app = builder.Build();
 WebHostEnviromentHelper.WebRootPath = Path.GetFullPath("wwwroot");
