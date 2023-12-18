@@ -33,6 +33,10 @@ public class EventService : IEventService
         if (@event is not null)
             throw new MDCException(409, "Event is already exist");
 
+        if(dto.StartAt > dto.EndAt)
+        {
+            throw new MDCException(404, "Start date is greater than end date ");
+        }
        
         var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.Banner.FileName);
         var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "Events", fileName);
