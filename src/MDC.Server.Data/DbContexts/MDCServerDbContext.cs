@@ -13,6 +13,7 @@ namespace MDC.Server.Data.DbContexts
 
         public DbSet<User> Users { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Location> Locations { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<UserEvent> UserEvents { get; set; }
         public DbSet<EventRole> EventRoles { get; set; }

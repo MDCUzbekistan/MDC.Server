@@ -20,6 +20,8 @@ using MDC.Server.Service.Services.Events;
 using MDC.Server.Service.Services.Languages;
 using MDC.Server.Service.Services.Users;
 using MDC.Server.Service.Services.Languages;
+using MDC.Server.Service.Interfaces.References;
+using MDC.Server.Service.Services.References;
 
 namespace MDC.Server.Api.Extensions;
 
@@ -64,6 +66,9 @@ public static class ServiceExtension
         services.AddScoped<IEventAssetService, EventAssetService>();
         services.AddScoped<IEventAssetReposiytory, EventAssetRepository>();
 
+        //Location
+        services.AddScoped<ILocationService, LocationService>();
+        services.AddScoped<ILocationRepository, LocationRepository>();
 
     }
 }
