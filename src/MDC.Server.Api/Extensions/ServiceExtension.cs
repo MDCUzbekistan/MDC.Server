@@ -1,4 +1,8 @@
 ﻿using MDC.Server.Data.IRepositories;
+using MDC.Server.Data.Repositories;
+using MDC.Server.Service.Interfaces.CommunityRoles;
+using MDC.Server.Service.Mappings;
+using MDC.Server.Service.Services.CommunityRoles;
 using MDC.Server.Data.IRepositories.Languages;
 using MDC.Server.Data.Repositories;
 using MDC.Server.Data.Repositories.Languages;
@@ -18,6 +22,9 @@ public static class ServiceExtension
     {
         services.AddAutoMapper(typeof(MappingProfile));
 
+        services.AddScoped<ICommunityRoleRepository, CommunityRoleRepository>();
+        services.AddScoped<ICommunityRoleService, CommunityRoleService>();
+      
         // Generic Repository
         services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 
@@ -29,8 +36,8 @@ public static class ServiceExtension
         services.AddScoped<ILanguageService, LanguageService>();
         services.AddScoped<ILanguageRepository, LanguageRepository>();
 
-
         services.AddScoped<IEventRepository, EventRepository>();
         services.AddScoped<IEventService, EventService>();
+
     }
 }
