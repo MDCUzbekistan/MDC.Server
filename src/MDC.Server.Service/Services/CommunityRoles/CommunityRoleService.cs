@@ -48,11 +48,11 @@ public class CommunityRoleService : ICommunityRoleService
             throw new MDCException(404, "CommunityRole not found.");
         
         communityRole.UpdatedAt = DateTime.UtcNow;
-        var CR = _mapper.Map(dto,communityRole);
+        var mappedCommunityRole = _mapper.Map(dto,communityRole);
 
-        await _repository.UpdateAsync(CR);
+        await _repository.UpdateAsync(mappedCommunityRole);
 
-        return _mapper.Map<CommunityRoleForResultDto>(CR);
+        return _mapper.Map<CommunityRoleForResultDto>(mappedCommunityRole);
     }
 
     public async Task<bool> RemoveAsync(short id)
