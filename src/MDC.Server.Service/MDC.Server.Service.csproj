@@ -7,14 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MDC.Server.Data\MDC.Server.Data.csproj" />
-    <ProjectReference Include="..\MDC.Server.Domain\MDC.Server.Domain.csproj" />
+
   </ItemGroup>
 
 </Project>

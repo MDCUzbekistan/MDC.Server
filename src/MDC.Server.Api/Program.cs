@@ -8,6 +8,7 @@ using MDC.Server.Service.Helpers;
 using MDC.Server.Service.Mappers;
 using Microsoft.EntityFrameworkCore;
 using MDC.Server.Api.Extensions;
+using Serilog;
 using MDC.Server.Api.Models;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
@@ -23,6 +24,14 @@ builder.Services.AddCustomService();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Logger
+var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+
 builder.Services.AddDbContext<MDCServerDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -34,6 +43,8 @@ builder.Services.AddControllers(options =>
     options.Conventions.Add(new RouteTokenTransformerConvention(
                                         new ConfigurationApiUrlName()));
 });
+
+builder.Services.AddCustomService();
 
 var app = builder.Build();
 WebHostEnviromentHelper.WebRootPath = Path.GetFullPath("wwwroot");
