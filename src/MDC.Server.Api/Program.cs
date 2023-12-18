@@ -30,7 +30,7 @@ var logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
     .CreateLogger();
 builder.Logging.ClearProviders();
-builder.Services.AddLogging();
+builder.Logging.AddSerilog(logger);
 
 builder.Services.AddDbContext<MDCServerDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
