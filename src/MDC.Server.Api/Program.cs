@@ -1,11 +1,11 @@
-using MDC.Server.Api.Extensions;
+using Serilog;
 using MDC.Server.Api.Models;
+using MDC.Server.Api.Extensions;
 using MDC.Server.Data.DbContexts;
 using MDC.Server.Service.Helpers;
-using MDC.Server.Service.Mappers;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using MDC.Server.Service.Mappings;
 using Microsoft.EntityFrameworkCore;
-using Serilog;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
