@@ -63,6 +63,7 @@ public class EventRoleService : IEventRoleService
             .FirstOrDefaultAsync();
         if(data is null)    
             throw new MDCException(404,"EventRole is not found");
+
         return await this._eventRoleRepository.DeleteAsync(id);
     }
 
