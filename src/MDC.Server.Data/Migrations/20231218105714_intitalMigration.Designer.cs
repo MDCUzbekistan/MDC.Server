@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MDC.Server.Data.Migrations
 {
     [DbContext(typeof(MDCServerDbContext))]
-    [Migration("20231214185118_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20231218105714_intitalMigration")]
+    partial class intitalMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -131,9 +131,6 @@ namespace MDC.Server.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Banner")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -169,6 +166,33 @@ namespace MDC.Server.Data.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("MDC.Server.Domain.Entities.Events.EventAsset", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("EventId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("EventAssets");
                 });
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Events.EventRole", b =>
@@ -363,40 +387,6 @@ namespace MDC.Server.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MDC.Server.Domain.Entities.Users.UserCommunity", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("CommunityId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<short>("RoleId")
-                        .HasColumnType("smallint");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommunityId");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserCommunity");
-                });
-
             modelBuilder.Entity("MDC.Server.Domain.Entities.Users.UserDetail", b =>
                 {
                     b.Property<long>("Id")
@@ -503,7 +493,7 @@ namespace MDC.Server.Data.Migrations
             modelBuilder.Entity("MDC.Server.Domain.Entities.Communities.UserCommunity", b =>
                 {
                     b.HasOne("MDC.Server.Domain.Entities.Communities.Community", "Community")
-                        .WithMany()
+                        .WithMany("UserCommunities")
                         .HasForeignKey("CommunityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -515,7 +505,7 @@ namespace MDC.Server.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("MDC.Server.Domain.Entities.Users.User", "User")
-                        .WithMany()
+                        .WithMany("UserCommunities")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -534,6 +524,17 @@ namespace MDC.Server.Data.Migrations
                         .HasForeignKey("LocationId");
 
                     b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("MDC.Server.Domain.Entities.Events.EventAsset", b =>
+                {
+                    b.HasOne("MDC.Server.Domain.Entities.Events.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
                 });
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Events.EventSession", b =>
@@ -562,33 +563,6 @@ namespace MDC.Server.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("MDC.Server.Domain.Entities.Users.UserCommunity", b =>
-                {
-                    b.HasOne("MDC.Server.Domain.Entities.Communities.Community", "Community")
-                        .WithMany()
-                        .HasForeignKey("CommunityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MDC.Server.Domain.Entities.Communities.CommunityRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MDC.Server.Domain.Entities.Users.User", "User")
-                        .WithMany("Communities")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Community");
-
-                    b.Navigation("Role");
 
                     b.Navigation("User");
                 });
@@ -640,7 +614,7 @@ namespace MDC.Server.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("MDC.Server.Domain.Entities.Users.User", "User")
-                        .WithMany()
+                        .WithMany("Languages")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -648,6 +622,11 @@ namespace MDC.Server.Data.Migrations
                     b.Navigation("Language");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MDC.Server.Domain.Entities.Communities.Community", b =>
+                {
+                    b.Navigation("UserCommunities");
                 });
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Events.Event", b =>
@@ -659,9 +638,11 @@ namespace MDC.Server.Data.Migrations
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Users.User", b =>
                 {
-                    b.Navigation("Communities");
-
                     b.Navigation("Events");
+
+                    b.Navigation("Languages");
+
+                    b.Navigation("UserCommunities");
 
                     b.Navigation("UserDetail");
                 });

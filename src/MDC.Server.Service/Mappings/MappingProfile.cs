@@ -10,6 +10,9 @@ using MDC.Server.Domain.Entities.Users;
 using MDC.Server.Service.DTOs.Community;
 using MDC.Server.Service.DTOs.Languages;
 using MDC.Server.Service.DTOs.Users;
+using MDC.Server.Service.DTOs.CommunityRoles;
+using MDC.Server.Service.DTOs.Events;
+using MDC.Server.Service.DTOs.EventAssets;
 
 namespace MDC.Server.Service.Mappings;
 
@@ -50,8 +53,10 @@ public class MappingProfile : Profile
         CreateMap<Event, EventForCreationDto>().ReverseMap();
         CreateMap<Event, EventForUpdateDto>().ReverseMap();
         CreateMap<Event, EventForResultDto>().ReverseMap();
-
-
+        // EventAsset
+        CreateMap<EventAsset, EventAssetForCreationDto>().ReverseMap();
+        CreateMap<EventAsset, EventAssetForUpdateDto>().ReverseMap();
+        CreateMap<EventAsset, EventAssetForResultDto>().ReverseMap();
         #endregion
         
     }

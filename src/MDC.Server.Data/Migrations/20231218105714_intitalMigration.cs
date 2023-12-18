@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MDC.Server.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class intitalMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -132,7 +132,6 @@ namespace MDC.Server.Data.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     Format = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
-                    Banner = table.Column<string>(type: "text", nullable: true),
                     LocationId = table.Column<long>(type: "bigint", nullable: true),
                     LiveStreamUrl = table.Column<string>(type: "text", nullable: true),
                     StartAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -211,41 +210,6 @@ namespace MDC.Server.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserCommunity",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    CommunityId = table.Column<long>(type: "bigint", nullable: false),
-                    RoleId = table.Column<short>(type: "smallint", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserCommunity", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserCommunity_Communities_CommunityId",
-                        column: x => x.CommunityId,
-                        principalTable: "Communities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserCommunity_CommunityRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "CommunityRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserCommunity_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserDatails",
                 columns: table => new
                 {
@@ -292,6 +256,28 @@ namespace MDC.Server.Data.Migrations
                         name: "FK_UserLanguages_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EventAssets",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EventId = table.Column<long>(type: "bigint", nullable: false),
+                    Image = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventAssets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EventAssets_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -369,6 +355,11 @@ namespace MDC.Server.Data.Migrations
                 column: "ParentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EventAssets_EventId",
+                table: "EventAssets",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EventSessions_EventId",
                 table: "EventSessions",
                 column: "EventId");
@@ -401,21 +392,6 @@ namespace MDC.Server.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_UserCommunities_UserId",
                 table: "UserCommunities",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserCommunity_CommunityId",
-                table: "UserCommunity",
-                column: "CommunityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserCommunity_RoleId",
-                table: "UserCommunity",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserCommunity_UserId",
-                table: "UserCommunity",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -454,6 +430,9 @@ namespace MDC.Server.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "EventAssets");
+
+            migrationBuilder.DropTable(
                 name: "EventSessions");
 
             migrationBuilder.DropTable(
@@ -461,9 +440,6 @@ namespace MDC.Server.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserCommunities");
-
-            migrationBuilder.DropTable(
-                name: "UserCommunity");
 
             migrationBuilder.DropTable(
                 name: "UserDatails");
