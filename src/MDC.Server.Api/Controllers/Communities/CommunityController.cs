@@ -31,9 +31,9 @@ namespace MDC.Server.Api.Controllers.Communities
         public async Task<IActionResult> CreateAsync([FromBody]CommunityForCreationDto community)
             =>Ok(await _communityService.CreateAsync(community));
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateAsync([FromBody]CommunityForUpdateDto community)
-            =>Ok(await _communityService.UpdateAsync(community));
+        [HttpPut("{community-id}")]
+        public async Task<IActionResult> UpdateAsync([FromRoute(Name = "community-id")] long Id,[FromBody]CommunityForUpdateDto community)
+            =>Ok(await _communityService.UpdateAsync(Id,community));
         
     }
 }

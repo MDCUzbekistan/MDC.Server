@@ -23,6 +23,7 @@ namespace MDC.Server.Data.DbContexts
         public DbSet<SpeakerDetail> SpeakerDetails { get; set; }
         public DbSet<CommunityRole> CommunityRoles { get; set; }
         public DbSet<UserCommunity> UserCommunities { get; set; }
+        public DbSet<CommunityImage> CommunityImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
