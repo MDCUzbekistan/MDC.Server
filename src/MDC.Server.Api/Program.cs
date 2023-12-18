@@ -35,6 +35,8 @@ builder.Services.AddControllers(options =>
                                         new ConfigurationApiUrlName()));
 });
 
+builder.Services.AddCustomService();
+
 var app = builder.Build();
 WebHostEnviromentHelper.WebRootPath = Path.GetFullPath("wwwroot");
 

@@ -1,3 +1,8 @@
+﻿using MDC.Server.Service.Mappings;
+using MDC.Server.Service.Services;
+using MDC.Server.Data.Repositories;
+using MDC.Server.Service.Interfaces;
+using MDC.Server.Data.IRepositories;
 ﻿using MDC.Server.Data.IRepositories;
 using MDC.Server.Data.Repositories;
 using MDC.Server.Service.Interfaces.CommunityRoles;
@@ -22,6 +27,15 @@ public static class ServiceExtension
     {
         services.AddAutoMapper(typeof(MappingProfile));
 
+        // Repository
+        services.AddScoped<IEventRepository, EventRepository>();
+        services.AddScoped<IUserEventRepository, UserEventRepository>();
+        services.AddScoped<IEventRoleRepository, EventRoleRepository>();
+        services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+
+        //Services
+        services.AddScoped<IUserEventService, UserEventService>();
+        services.AddScoped<IEventRoleService, EventRoleService>();
         services.AddScoped<ICommunityRoleRepository, CommunityRoleRepository>();
         services.AddScoped<ICommunityRoleService, CommunityRoleService>();
       
