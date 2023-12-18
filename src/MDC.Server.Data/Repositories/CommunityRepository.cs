@@ -6,7 +6,7 @@ namespace MDC.Server.Data.Repositories
 {
     public class CommunityRepository : Repository<Community,long>, ICommunityRepository
     {
-        public CommunityRepository(MDCServerDbContext dbContext) : base(dbContext)
+        public CommunityRepository(MDCDbContext dbContext) : base(dbContext)
         {
         }
     }

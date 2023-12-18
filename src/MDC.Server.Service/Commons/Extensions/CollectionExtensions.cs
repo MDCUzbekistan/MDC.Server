@@ -8,8 +8,8 @@ namespace MDC.Server.Service.Commons.Extensions;
 
 public static class CollectionExtensions
 {
-    public static IQueryable<TEntity> ToPagedList<TEntity>(this IQueryable<TEntity> source, PaginationParams @params)
-            where TEntity : Auditable<long>
+    public static IQueryable<TEntity> ToPagedList<TEntity, TKey>(this IQueryable<TEntity> source, PaginationParams @params)
+            where TEntity : Auditable<TKey>
     {
 
         var metaData = new PaginationMetaData(source.Count(), @params);

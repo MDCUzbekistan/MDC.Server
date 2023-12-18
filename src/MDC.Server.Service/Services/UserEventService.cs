@@ -7,35 +7,35 @@ using MDC.Server.Domain.Entities.Users;
 using MDC.Server.Domain.Configurations;
 using MDC.Server.Service.DTOs.UserEvents;
 using MDC.Server.Service.Commons.Extensions;
+using MDC.Server.Data.DbContexts;
 
 namespace MDC.Server.Service.Services;
 
 public class UserEventService : IUserEventService
 {
     private readonly IMapper _mapper;
-    private readonly IUserRepository _userRepository;
     private readonly IEventRepository _eventRepository;
     private readonly IEventRoleRepository _eventRoleRepository;
     private readonly IUserEventRepository _userEventRepository;
+    private readonly MDCDbContext _dbContext;
 
     public UserEventService(
         IMapper mapper,
-        IUserRepository userRepository,
         IEventRepository eventRepository,
         IEventRoleRepository eventRoleRepository,
-        IUserEventRepository userEventRepository)
+        IUserEventRepository userEventRepository,
+        MDCDbContext dbContext)
     {
         this._mapper = mapper;
-        this._userRepository = userRepository;
         this._eventRepository = eventRepository;
         this._eventRoleRepository = eventRoleRepository;
         this._userEventRepository = userEventRepository;
+        _dbContext=dbContext;
     }
 
     public async Task<UserEventForResultDto> AddAsync(UserEventForCreationDto dto)
     {
-        var userData = await this._userRepository
-            .SelectAll()
+        var userData = await this._dbContext.Users
             .Where(u => u.Id == dto.UserId)
             .AsNoTracking()
             .FirstOrDefaultAsync();
@@ -75,8 +75,7 @@ public class UserEventService : IUserEventService
         if(data is null)
             throw new MDCException(404,"UserEvent is not found");
 
-        var user = await this._userRepository
-            .SelectAll()
+        var user = await this._dbContext.Users
             .Where(u => u.Id == dto.UserId)
             .AsNoTracking()
             .FirstOrDefaultAsync();
