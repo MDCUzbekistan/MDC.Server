@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MDC.Server.Data.Repositories;
 
-public class Repository<TEntity,TKey> : IRepository<TEntity,TKey> where TEntity : Auditable<TKey>
+public class Repository<TEntity, TKey> : IRepository<TEntity,TKey> where TEntity : Auditable<TKey>
 {
     protected readonly MDCServerDbContext _dbContext;
     protected readonly DbSet<TEntity> _dbSet;

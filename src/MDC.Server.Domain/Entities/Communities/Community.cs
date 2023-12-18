@@ -18,5 +18,6 @@ namespace MDC.Server.Domain.Entities.Communities
 
         public long? ParentId { get; set; }
         public Community Parent { get; set; }
+        public ICollection<UserCommunity> UserCommunities { get; set; }
     }
 }
