@@ -1,5 +1,4 @@
-﻿using MDC.Server.Domain.Configurations;
-using MDC.Server.Service.DTOs.Languages;
+﻿using MDC.Server.Service.DTOs.Languages;
 
 namespace MDC.Server.Service.Interfaces.Languages;
 
