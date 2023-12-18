@@ -28,6 +28,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Media\Events\" />
+    <Folder Include="wwwroot\Media\UserDetails\Images\" />
+    <Folder Include="wwwroot\Media\UserDetails\Resumes\" />
   </ItemGroup>
 
 </Project>
