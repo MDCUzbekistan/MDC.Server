@@ -3,19 +3,14 @@ using MDC.Server.Service.Services;
 using MDC.Server.Data.Repositories;
 using MDC.Server.Service.Interfaces;
 using MDC.Server.Data.IRepositories;
-﻿using MDC.Server.Data.IRepositories;
-using MDC.Server.Data.Repositories;
 using MDC.Server.Service.Interfaces.CommunityRoles;
-using MDC.Server.Service.Mappings;
 using MDC.Server.Service.Services.CommunityRoles;
 using MDC.Server.Data.IRepositories.Languages;
-using MDC.Server.Data.Repositories;
 using MDC.Server.Data.Repositories.Languages;
 using MDC.Server.Service.Interfaces.Communities;
 using MDC.Server.Service.Interfaces.Events;
 using MDC.Server.Service.Interfaces.Languages;
 using MDC.Server.Service.Interfaces.Users;
-using MDC.Server.Service.Mappings;
 using MDC.Server.Service.Services.Events;
 using MDC.Server.Service.Services.Languages;
 using MDC.Server.Service.Services.Users;
@@ -34,6 +29,7 @@ public static class ServiceExtension
         services.AddScoped<IUserEventRepository, UserEventRepository>();
         services.AddScoped<IEventRoleRepository, EventRoleRepository>();
         services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+        services.AddScoped<IUserLanguageRepository, UserLanguageRepository>();
 
         //Services
         services.AddScoped<IUserEventService, UserEventService>();
