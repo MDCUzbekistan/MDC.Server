@@ -48,6 +48,10 @@ public static class ServiceExtension
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IUserRepository, UserRepository>();
 
+        // UserDetail
+        services.AddScoped<IUserDetailRepository, UserDetailRepository>();  
+        services.AddScoped<IUserDetailService, UserDetailService>();  
+
         //Language
         services.AddScoped<ILanguageService, LanguageService>();
         services.AddScoped<ILanguageRepository, LanguageRepository>();

@@ -7,10 +7,11 @@ using MDC.Server.Domain.Configurations;
 using MDC.Server.Domain.Entities.Users;
 using MDC.Server.Service.DTOs.UserDetails;
 using MDC.Server.Service.Commons.Extensions;
+using MDC.Server.Service.Interfaces.Users;
 
 namespace MDC.Server.Service.Services.Users;
 
-public class UserDetailService
+public class UserDetailService : IUserDetailService
 {
     private readonly IMapper _mapper;
     private readonly IUserDetailRepository _userDetailRepository;

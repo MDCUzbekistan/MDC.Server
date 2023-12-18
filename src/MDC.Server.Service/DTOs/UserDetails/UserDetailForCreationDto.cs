@@ -1,5 +1,4 @@
-﻿using MDC.Server.Domain.Entities.Users;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace MDC.Server.Service.DTOs.UserDetails;
 
