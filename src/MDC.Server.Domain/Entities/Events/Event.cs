@@ -1,12 +1,6 @@
-﻿using MDC.Server.Domain.Commons;
-using MDC.Server.Domain.Entities.References;
+﻿using MDC.Server.Domain.Enums;
+using MDC.Server.Domain.Commons;
 using MDC.Server.Domain.Entities.Users;
-using MDC.Server.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MDC.Server.Domain.Entities.Events
 {

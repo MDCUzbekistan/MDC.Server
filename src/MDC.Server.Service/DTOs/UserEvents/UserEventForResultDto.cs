@@ -7,7 +7,7 @@ namespace MDC.Server.Service.DTOs.UserEvents;
 public class UserEventForResultDto
 {
     public long Id { get; set; }
-    public UserForCreationDto User { get; set; }
-    public EventForCreationDto Event { get; set; }
-    public EventRoleForCreationDto Role { get; set; }
+    public UserForResultDto User { get; set; }
+    public EventForResultDto Event { get; set; }
+    public EventRoleForResultDto Role { get; set; }
 }

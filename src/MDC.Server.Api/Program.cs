@@ -1,13 +1,9 @@
 using Serilog;
+using Newtonsoft.Json;
 using MDC.Server.Api.Models;
 using MDC.Server.Api.Extensions;
-<<<<<<< HEAD
 using MDC.Server.Data.DbContexts;
 using MDC.Server.Service.Helpers;
-=======
-using MDC.Server.Service.Helpers;
-using MDC.Server.Data.DbContexts;
->>>>>>> f2e798ec644ce826731dce2f50fb2a7fae3189e0
 using MDC.Server.Service.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
@@ -17,6 +13,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<MDCServerDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+////// Fix the Cycle
+builder.Services.AddControllers()
+     .AddNewtonsoftJson(options =>
+     {
+         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+     });
 
 builder.Services.AddControllers();
 builder.Services.AddCustomService();
