@@ -6,6 +6,6 @@ namespace MDC.Server.Data.Repositories;
 
 public class UserEventRepository : Repository<UserEvent, long>, IUserEventRepository
 {
-    public UserEventRepository(MDCServerDbContext dbContext) : base(dbContext)
+    public UserEventRepository(MDCDbContext dbContext) : base(dbContext)
     { }
 }

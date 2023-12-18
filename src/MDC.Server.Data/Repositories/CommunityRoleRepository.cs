@@ -6,6 +6,6 @@ namespace MDC.Server.Data.Repositories;
 
 public class CommunityRoleRepository : Repository<CommunityRole, short>, ICommunityRoleRepository
 {
-    public CommunityRoleRepository(MDCServerDbContext dbContext) : base(dbContext)
+    public CommunityRoleRepository(MDCDbContext dbContext) : base(dbContext)
     { }
 }

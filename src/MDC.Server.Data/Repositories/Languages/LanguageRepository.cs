@@ -6,7 +6,7 @@ namespace MDC.Server.Data.Repositories.Languages;
 
 public class LanguageRepository : Repository<Language, short>, ILanguageRepository
 {
-    public LanguageRepository(MDCServerDbContext dbContext) : base(dbContext)
+    public LanguageRepository(MDCDbContext dbContext) : base(dbContext)
     {
     }
 }

@@ -6,7 +6,7 @@ namespace MDC.Server.Data.Repositories;
 
 public class EventAssetRepository : Repository<EventAsset, long>, IEventAssetReposiytory
 {
-    public EventAssetRepository(MDCServerDbContext dbContext) : base(dbContext)
+    public EventAssetRepository(MDCDbContext dbContext) : base(dbContext)
     {
     }
 }
