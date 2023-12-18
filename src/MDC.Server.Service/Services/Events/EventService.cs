@@ -1,15 +1,13 @@
 ﻿using AutoMapper;
-using MDC.Server.Data.IRepositories;
+using MDC.Server.Service.Helpers;
 using MDC.Server.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using MDC.Server.Data.IRepositories;
 using MDC.Server.Service.DTOs.Events;
 using MDC.Server.Domain.Configurations;
 using MDC.Server.Domain.Entities.Events;
-using MDC.Server.Service.Interfaces.Events;
 using MDC.Server.Service.Commons.Extensions;
-using Microsoft.AspNetCore.Http;
-using MDC.Server.Service.Helpers;
-using MDC.Server.Domain.Entities.Users;
+using MDC.Server.Service.Interfaces.Events;
 
 namespace MDC.Server.Service.Services.Events;
 
@@ -18,9 +16,9 @@ public class EventService : IEventService
     private readonly IMapper _mapper;
     private readonly IRepository<Event, long> _repository;
 
-    public EventService(IMapper mapper, IRepository<Event,long> repository)
+    public EventService(IMapper mapper, IRepository<Event, long> repository)
     {
-        _mapper = mapper;   
+        _mapper = mapper;
         _repository = repository;
     }
     public async Task<EventForResultDto> CreateAsync(EventForCreationDto dto)
@@ -33,11 +31,11 @@ public class EventService : IEventService
         if (@event is not null)
             throw new MDCException(409, "Event is already exist");
 
-        if(dto.StartAt > dto.EndAt)
+        if (dto.StartAt > dto.EndAt)
         {
             throw new MDCException(404, "Start date is greater than end date ");
         }
-       
+
         var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.Banner.FileName);
         var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "Events", fileName);
         using (var stream = new FileStream(rootPath, FileMode.Create))
@@ -47,8 +45,8 @@ public class EventService : IEventService
             stream.Close();
         }
         string resultImage = Path.Combine("Media", "Events", fileName);
-       
-        
+
+
         var MappedData = this._mapper.Map<Event>(dto);
         MappedData.Banner = resultImage;
         var result = await _repository.InsertAsync(MappedData);
