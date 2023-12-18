@@ -5,11 +5,9 @@ using MDC.Server.Domain.Entities.Events;
 using MDC.Server.Service.DTOs.EventRoles;
 using MDC.Server.Service.DTOs.UserEvents;
 using MDC.Server.Domain.Entities.Communities;
-using MDC.Server.Service.DTOs.CommunityRoles;
-using MDC.Server.Domain.Entities.Events;
 using MDC.Server.Domain.Entities.References;
 using MDC.Server.Domain.Entities.Users;
-using MDC.Server.Service.DTOs.Events;
+using MDC.Server.Service.DTOs.Community;
 using MDC.Server.Service.DTOs.Languages;
 using MDC.Server.Service.DTOs.Users;
 
@@ -44,6 +42,10 @@ public class MappingProfile : Profile
         CreateMap<Language, LanguageForUpdateDto>().ReverseMap();
         CreateMap<Language, LanguageForResultDto>().ReverseMap();
 
+        ///Communities
+        CreateMap<Community,CommunityForResultDto>().ReverseMap();
+        CreateMap<Community, CommunityForUpdateDto>().ReverseMap();
+        CreateMap<Community,CommunityForCreationDto>().ReverseMap();
         // Event
         CreateMap<Event, EventForCreationDto>().ReverseMap();
         CreateMap<Event, EventForUpdateDto>().ReverseMap();
@@ -51,6 +53,7 @@ public class MappingProfile : Profile
 
 
         #endregion
+        
     }
 }
  
