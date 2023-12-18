@@ -36,15 +36,15 @@ public class EventService : IEventService
             throw new MDCException(404, "Start date is greater than end date ");
         }
        
-        var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.Banner.FileName);
-        var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "Events", fileName);
-        using (var stream = new FileStream(rootPath, FileMode.Create))
-        {
-            await dto.Banner.CopyToAsync(stream);
-            await stream.FlushAsync();
-            stream.Close();
-        }
-        string resultImage = Path.Combine("Media", "Events", fileName);
+        //var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.Banner.FileName);
+        //var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "Events", fileName);
+        //using (var stream = new FileStream(rootPath, FileMode.Create))
+        //{
+        //    await dto.Banner.CopyToAsync(stream);
+        //    await stream.FlushAsync();
+        //    stream.Close();
+        //}
+        //string resultImage = Path.Combine("Media", "Events", fileName);
        
         
         var MappedData = this._mapper.Map<Event>(dto);
