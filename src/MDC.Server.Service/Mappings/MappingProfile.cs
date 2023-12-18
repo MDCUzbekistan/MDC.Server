@@ -10,6 +10,10 @@ using MDC.Server.Service.DTOs.UserEvents;
 using MDC.Server.Domain.Entities.References;
 using MDC.Server.Service.DTOs.CommunityRoles;
 using MDC.Server.Domain.Entities.Communities;
+]using MDC.Server.Service.DTOs.Users;
+using MDC.Server.Service.DTOs.CommunityRoles;
+using MDC.Server.Service.DTOs.Events;
+using MDC.Server.Service.DTOs.EventAssets;
 
 namespace MDC.Server.Service.Mappings;
 
@@ -46,14 +50,15 @@ public class MappingProfile : Profile
         ///Communities
         CreateMap<Community, CommunityForResultDto>().ReverseMap();
         CreateMap<Community, CommunityForUpdateDto>().ReverseMap();
-        CreateMap<Community, CommunityForCreationDto>().ReverseMap();
-        
-
-
-        CreateMap<CommunityRole, CommunityRoleForCreationDto>().ReverseMap();
-        CreateMap<CommunityRole, CommunityRoleForUpdateDto>().ReverseMap();
-        CreateMap<CommunityRole, CommunityRoleForResultDto>().ReverseMap();
-
+        CreateMap<Community,CommunityForCreationDto>().ReverseMap();
+        // Event
+        CreateMap<Event, EventForCreationDto>().ReverseMap();
+        CreateMap<Event, EventForUpdateDto>().ReverseMap();
+        CreateMap<Event, EventForResultDto>().ReverseMap();
+        // EventAsset
+        CreateMap<EventAsset, EventAssetForCreationDto>().ReverseMap();
+        CreateMap<EventAsset, EventAssetForUpdateDto>().ReverseMap();
+        CreateMap<EventAsset, EventAssetForResultDto>().ReverseMap();
         #endregion
 
     }
