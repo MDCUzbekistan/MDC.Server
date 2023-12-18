@@ -1,26 +1,24 @@
 ﻿using AutoMapper;
-using MDC.Server.Data.IRepositories;
+using MDC.Server.Service.Helpers;
 using MDC.Server.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using MDC.Server.Data.IRepositories;
 using MDC.Server.Service.DTOs.Events;
 using MDC.Server.Domain.Configurations;
 using MDC.Server.Domain.Entities.Events;
-using MDC.Server.Service.Interfaces.Events;
 using MDC.Server.Service.Commons.Extensions;
-using Microsoft.AspNetCore.Http;
-using MDC.Server.Service.Helpers;
-using MDC.Server.Domain.Entities.Users;
+using MDC.Server.Service.Interfaces.Events;
 
 namespace MDC.Server.Service.Services.Events;
 
 public class EventService : IEventService
 {
     private readonly IMapper _mapper;
-    private readonly IRepository<Event, long> _repository;
+    private readonly IEventRepository _repository;
 
-    public EventService(IMapper mapper, IRepository<Event,long> repository)
+    public EventService(IMapper mapper, IEventRepository repository)
     {
-        _mapper = mapper;   
+        _mapper = mapper;
         _repository = repository;
     }
     public async Task<EventForResultDto> CreateAsync(EventForCreationDto dto)
@@ -33,7 +31,7 @@ public class EventService : IEventService
         if (@event is not null)
             throw new MDCException(409, "Event is already exist");
 
-        if(dto.StartAt > dto.EndAt)
+        if (dto.StartAt > dto.EndAt)
         {
             throw new MDCException(404, "Start date is greater than end date ");
         }
@@ -50,7 +48,6 @@ public class EventService : IEventService
        
         
         var MappedData = this._mapper.Map<Event>(dto);
-        MappedData.Banner = resultImage;
         var result = await _repository.InsertAsync(MappedData);
 
         return _mapper.Map<EventForResultDto>(result);
@@ -65,27 +62,8 @@ public class EventService : IEventService
         if (@event is null)
             throw new MDCException(404, "Event is not found");
 
-        var fullPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, @event.Banner);
-
-        if (File.Exists(fullPath))
-        {
-            File.Delete(fullPath);
-        }
-
-
-        var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.Banner.FileName);
-        var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "Events", fileName);
-        using (var stream = new FileStream(rootPath, FileMode.Create))
-        {
-            await dto.Banner.CopyToAsync(stream);
-            await stream.FlushAsync();
-            stream.Close();
-        }
-        string resultImage = Path.Combine("Media", "Events", fileName);
-
         var mapped = _mapper.Map(dto, @event);
         mapped.UpdatedAt = DateTime.UtcNow;
-        mapped.Banner = resultImage;
 
         var result = await _repository.UpdateAsync(mapped);
 
@@ -100,13 +78,6 @@ public class EventService : IEventService
 
         if (@event is null)
             throw new MDCException(404, "Event is not found");
-
-        var fullPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, @event.Banner);
-
-        if (File.Exists(fullPath))
-        {
-            File.Delete(fullPath);
-        }
 
         return await _repository.DeleteAsync(id);
     }

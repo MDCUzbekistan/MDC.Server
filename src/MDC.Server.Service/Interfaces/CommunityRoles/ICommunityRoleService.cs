@@ -1,5 +1,4 @@
-﻿using MDC.Server.Domain.Configurations;
-using MDC.Server.Service.DTOs.CommunityRoles;
+﻿using MDC.Server.Service.DTOs.CommunityRoles;
 
 namespace MDC.Server.Service.Interfaces.CommunityRoles;
 

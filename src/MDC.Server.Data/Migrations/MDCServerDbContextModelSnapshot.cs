@@ -56,6 +56,8 @@ namespace MDC.Server.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentId");
+
                     b.ToTable("Communities");
                 });
 
@@ -126,9 +128,6 @@ namespace MDC.Server.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Banner")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -164,6 +163,33 @@ namespace MDC.Server.Data.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("MDC.Server.Domain.Entities.Events.EventAsset", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("EventId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("EventAssets");
                 });
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Events.EventRole", b =>
@@ -452,6 +478,15 @@ namespace MDC.Server.Data.Migrations
                     b.ToTable("UserLanguages");
                 });
 
+            modelBuilder.Entity("MDC.Server.Domain.Entities.Communities.Community", b =>
+                {
+                    b.HasOne("MDC.Server.Domain.Entities.Communities.Community", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("MDC.Server.Domain.Entities.Communities.UserCommunity", b =>
                 {
                     b.HasOne("MDC.Server.Domain.Entities.Communities.Community", "Community")
@@ -486,6 +521,17 @@ namespace MDC.Server.Data.Migrations
                         .HasForeignKey("LocationId");
 
                     b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("MDC.Server.Domain.Entities.Events.EventAsset", b =>
+                {
+                    b.HasOne("MDC.Server.Domain.Entities.Events.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
                 });
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Events.EventSession", b =>

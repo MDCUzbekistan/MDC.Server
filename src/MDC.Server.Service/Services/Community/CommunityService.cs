@@ -29,7 +29,6 @@ public  class CommunityService : ICommunityService
             .Where(c => c.Title == communityDto.Title)
             .AsNoTracking()
             .FirstOrDefaultAsync();
-
         if (community is not null)
             throw new MDCException(409, "Community already exists !");
 
@@ -58,7 +57,6 @@ public  class CommunityService : ICommunityService
             .Where(c => c.Id == Id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
-
         if (community is null)
             throw new MDCException(404, "Community is not found !");
 
