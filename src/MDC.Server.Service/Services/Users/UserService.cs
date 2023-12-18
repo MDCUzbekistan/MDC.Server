@@ -1,22 +1,21 @@
 ﻿using AutoMapper;
 using MDC.Server.Data.IRepositories;
-using MDC.Server.Domain.Entities.Users;
 using MDC.Server.Service.DTOs.Users;
 using MDC.Server.Service.Exceptions;
-using MDC.Server.Service.Interfaces.Users;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.Serialization;
+using MDC.Server.Domain.Entities.Users;
+using MDC.Server.Service.Interfaces.Users;
 
 namespace MDC.Server.Service.Services.Users;
 public class UserService : IUserService
 {
-    private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
+    private readonly IUserRepository _userRepository;
 
-    public UserService(IUserRepository repository, IMapper mapper)
+    public UserService(IMapper mapper, IUserRepository userRepository)
     {
-        _userRepository = repository;
         _mapper = mapper;
+        _userRepository = userRepository;
     }
 
 
@@ -26,24 +25,23 @@ public class UserService : IUserService
                 .Where(u => u.Email.ToLower() == dto.Email.ToLower())
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
-
         if (user is not null)
-            throw new MDCException(409,"User already exists!");
+            throw new MDCException(409, "User already exists!");
 
         var mapped = _mapper.Map<User>(dto);
         mapped.CreatedAt = DateTime.UtcNow;
 
         var result = await _userRepository.InsertAsync(mapped);
-       return _mapper.Map<UserForResultDto>(result);
+
+        return _mapper.Map<UserForResultDto>(result);
     }
 
     public async Task<bool> DeleteAsync(long id)
     {
         var user = await _userRepository.SelectAll()
-            .Where(u => u.Id==id)
+            .Where(u => u.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
-
         if (user is null)
             throw new MDCException(404, "User is not found!");
 
@@ -80,10 +78,10 @@ public class UserService : IUserService
 
     public async Task<UserForResultDto> RetrieveByEmailAsync(string email)
     {
-       var user = await _userRepository.SelectAll()
-           .Where(u => u.Email.ToLower() == email.ToLower())
-           .AsNoTracking()
-           .FirstOrDefaultAsync();
+        var user = await _userRepository.SelectAll()
+            .Where(u => u.Email.ToLower() == email.ToLower())
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
 
         if (user is null)
             throw new MDCException(404, "User is not found!");

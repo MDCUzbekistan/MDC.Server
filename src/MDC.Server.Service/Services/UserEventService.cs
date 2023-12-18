@@ -34,7 +34,7 @@ public class UserEventService : IUserEventService
 
     public async Task<UserEventForResultDto> AddAsync(UserEventForCreationDto dto)
     {
-        var userData = await this._userEventRepository
+        var userData = await this._userRepository
             .SelectAll()
             .Where(u => u.Id == dto.UserId)
             .AsNoTracking()
@@ -75,7 +75,7 @@ public class UserEventService : IUserEventService
         if(data is null)
             throw new MDCException(404,"UserEvent is not found");
 
-        var user = await this._userEventRepository
+        var user = await this._userRepository
             .SelectAll()
             .Where(u => u.Id == dto.UserId)
             .AsNoTracking()
