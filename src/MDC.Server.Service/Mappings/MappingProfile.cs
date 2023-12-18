@@ -4,10 +4,14 @@ using MDC.Server.Domain.Entities.Users;
 using MDC.Server.Domain.Entities.Events;
 using MDC.Server.Service.DTOs.EventRoles;
 using MDC.Server.Service.DTOs.UserEvents;
-<<<<<<< HEAD
-=======
+using MDC.Server.Domain.Entities.Communities;
+using MDC.Server.Service.DTOs.CommunityRoles;
+using MDC.Server.Domain.Entities.Events;
+using MDC.Server.Domain.Entities.References;
+using MDC.Server.Domain.Entities.Users;
+using MDC.Server.Service.DTOs.Events;
+using MDC.Server.Service.DTOs.Languages;
 using MDC.Server.Service.DTOs.Users;
->>>>>>> 7a8b8f7a8fa32bbba40309856932631eab124657
 
 namespace MDC.Server.Service.Mappings;
 
@@ -24,14 +28,29 @@ public class MappingProfile : Profile
         CreateMap<EventRole, EventRoleForResultDto>().ReverseMap();
         CreateMap<EventRole, EventRoleForUpdateDto>().ReverseMap();
         CreateMap<EventRole, EventRoleForCreationDto>().ReverseMap();
-<<<<<<< HEAD
-
-=======
->>>>>>> 7a8b8f7a8fa32bbba40309856932631eab124657
+        
+        CreateMap<CommunityRole, CommunityRoleForCreationDto>().ReverseMap();
+        CreateMap<CommunityRole, CommunityRoleForUpdateDto>().ReverseMap();
+        CreateMap<CommunityRole, CommunityRoleForResultDto>().ReverseMap();
+        
         #region
+        //Users
         CreateMap<User, UserForCreationDto>().ReverseMap();
         CreateMap<User, UserForUpdateDto>().ReverseMap();
         CreateMap<User, UserForResultDto>().ReverseMap();
+
+        //Languages
+        CreateMap<Language, LanguageForCreationDto>().ReverseMap();
+        CreateMap<Language, LanguageForUpdateDto>().ReverseMap();
+        CreateMap<Language, LanguageForResultDto>().ReverseMap();
+
+        // Event
+        CreateMap<Event, EventForCreationDto>().ReverseMap();
+        CreateMap<Event, EventForUpdateDto>().ReverseMap();
+        CreateMap<Event, EventForResultDto>().ReverseMap();
+
+
         #endregion
     }
 }
+ 

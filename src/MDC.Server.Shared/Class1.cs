@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MDC.Server.Service.Interfaces
+namespace MDC.Server.Service.Services
 {
     internal class Class1
     {
