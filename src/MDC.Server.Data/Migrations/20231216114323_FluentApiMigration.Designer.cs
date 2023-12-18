@@ -3,6 +3,7 @@ using System;
 using MDC.Server.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MDC.Server.Data.Migrations
 {
     [DbContext(typeof(MDCServerDbContext))]
-    partial class MDCServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231216114323_FluentApiMigration")]
+    partial class FluentApiMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,6 +58,8 @@ namespace MDC.Server.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
 
                     b.ToTable("Communities");
                 });
@@ -450,6 +455,15 @@ namespace MDC.Server.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserLanguages");
+                });
+
+            modelBuilder.Entity("MDC.Server.Domain.Entities.Communities.Community", b =>
+                {
+                    b.HasOne("MDC.Server.Domain.Entities.Communities.Community", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Communities.UserCommunity", b =>

@@ -3,6 +3,7 @@ using System;
 using MDC.Server.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MDC.Server.Data.Migrations
 {
     [DbContext(typeof(MDCServerDbContext))]
-    partial class MDCServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231215175431_eventMigration")]
+    partial class eventMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,6 +58,8 @@ namespace MDC.Server.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
 
                     b.ToTable("Communities");
                 });
@@ -452,10 +457,19 @@ namespace MDC.Server.Data.Migrations
                     b.ToTable("UserLanguages");
                 });
 
+            modelBuilder.Entity("MDC.Server.Domain.Entities.Communities.Community", b =>
+                {
+                    b.HasOne("MDC.Server.Domain.Entities.Communities.Community", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("MDC.Server.Domain.Entities.Communities.UserCommunity", b =>
                 {
                     b.HasOne("MDC.Server.Domain.Entities.Communities.Community", "Community")
-                        .WithMany("UserCommunities")
+                        .WithMany()
                         .HasForeignKey("CommunityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -467,7 +481,7 @@ namespace MDC.Server.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("MDC.Server.Domain.Entities.Users.User", "User")
-                        .WithMany("UserCommunities")
+                        .WithMany("Communities")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -565,7 +579,7 @@ namespace MDC.Server.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("MDC.Server.Domain.Entities.Users.User", "User")
-                        .WithMany("Languages")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -573,11 +587,6 @@ namespace MDC.Server.Data.Migrations
                     b.Navigation("Language");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("MDC.Server.Domain.Entities.Communities.Community", b =>
-                {
-                    b.Navigation("UserCommunities");
                 });
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Events.Event", b =>
@@ -589,11 +598,9 @@ namespace MDC.Server.Data.Migrations
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Users.User", b =>
                 {
+                    b.Navigation("Communities");
+
                     b.Navigation("Events");
-
-                    b.Navigation("Languages");
-
-                    b.Navigation("UserCommunities");
 
                     b.Navigation("UserDetail");
                 });
