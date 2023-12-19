@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +19,11 @@
   <ItemGroup>
     <ProjectReference Include="..\MDC.Server.Data\MDC.Server.Data.csproj" />
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\Users\" />
+    <Folder Include="Services\Users\" />
   </ItemGroup>
 
 </Project>
