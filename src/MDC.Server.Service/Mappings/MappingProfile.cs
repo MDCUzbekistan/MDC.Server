@@ -75,6 +75,12 @@ public class MappingProfile : Profile
         CreateMap<EventAsset, EventAssetForCreationDto>().ReverseMap();
         CreateMap<EventAsset, EventAssetForUpdateDto>().ReverseMap();
         CreateMap<EventAsset, EventAssetForResultDto>().ReverseMap();
+
+        // CommunityRole
+        CreateMap<CommunityRole,  CommunityRoleForCreationDto>().ReverseMap();
+        CreateMap<CommunityRole,  CommunityRoleForUpdateDto>().ReverseMap();
+        CreateMap<CommunityRole,  CommunityRoleForResultDto>().ReverseMap();
+
         #endregion
 
     }
