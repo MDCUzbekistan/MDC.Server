@@ -12,6 +12,8 @@ using MDC.Server.Service.Interfaces.Events;
 using MDC.Server.Service.Interfaces.Languages;
 using MDC.Server.Service.Services.Events;
 using MDC.Server.Service.Services.Languages;
+using MDC.Server.Service.Interfaces.Users;
+using MDC.Server.Service.Services.Users;
 
 namespace MDC.Server.Api.Extensions;
 
@@ -37,8 +39,7 @@ public static class ServiceExtension
         services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 
         //User
-        services.AddScoped<IUserService, UserService>();
-        services.AddScoped<IUserRepository, UserRepository>();
+        
 
         // UserDetail
         services.AddScoped<IUserDetailRepository, UserDetailRepository>();  

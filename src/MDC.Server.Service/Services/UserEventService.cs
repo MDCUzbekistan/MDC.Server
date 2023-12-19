@@ -125,7 +125,7 @@ public class UserEventService : IUserEventService
             .Include(u => u.Event)
             .Include(u => u.Role)
             .AsNoTracking()
-            .ToPagedList(@params)
+            .ToPagedList<UserEvent,long>(@params)
             .ToListAsync();
         if(data is null)
             throw new MDCException(404,"Data are not found");

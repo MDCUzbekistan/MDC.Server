@@ -19,7 +19,7 @@ namespace MDC.Server.Domain.Entities.Events
         public DateTime? StartAt { get; set; }
         public DateTime? EndAt { get; set; }
 
-        public long SpeakerId { get; set; }
+        public string SpeakerId { get; set; }
         public User Speaker { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace MDC.Server.Data.Repositories;
 
 public class UserDetailRepository : Repository<UserDetail, long>, IUserDetailRepository
 {
-    public UserDetailRepository(MDCServerDbContext dbContext) : base(dbContext)
+    public UserDetailRepository(MDCDbContext dbContext) : base(dbContext)
     {
     }
 }

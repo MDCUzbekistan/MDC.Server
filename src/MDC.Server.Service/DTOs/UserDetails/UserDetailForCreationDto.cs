@@ -4,7 +4,7 @@ namespace MDC.Server.Service.DTOs.UserDetails;
 
 public class UserDetailForCreationDto
 {
-    public long UserId { get; set; }
+    public string UserId { get; set; }
     public IFormFile Image { get; set; }
     public IFormFile Resume { get; set; }
 }

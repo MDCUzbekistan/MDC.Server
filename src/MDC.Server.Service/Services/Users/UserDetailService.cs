@@ -153,7 +153,7 @@ public class UserDetailService : IUserDetailService
         var userDetail = await _userDetailRepository.SelectAll()
                 .Include(ud => ud.User)
                 .AsNoTracking()
-                .ToPagedList(@params)
+                .ToPagedList<UserDetail, long>(@params)
                 .ToListAsync();
 
         return _mapper.Map<IEnumerable<UserDetailForResultDto>>(userDetail);
