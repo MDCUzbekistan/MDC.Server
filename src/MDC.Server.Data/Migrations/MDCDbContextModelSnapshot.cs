@@ -51,7 +51,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -78,7 +78,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -103,7 +103,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<short>("RoleId")
                         .HasColumnType("smallint");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
@@ -155,7 +155,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -182,7 +182,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -209,7 +209,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -240,23 +240,20 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<long>("SpeakerId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("SpeakerId1")
+                    b.Property<string>("SpeakerId")
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("StartAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
 
-                    b.HasIndex("SpeakerId1");
+                    b.HasIndex("SpeakerId");
 
                     b.ToTable("EventSessions");
                 });
@@ -278,7 +275,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -306,7 +303,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<long>("Longitude")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -337,7 +334,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("SpeechImage")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
@@ -440,7 +437,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Resume")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
@@ -451,7 +448,7 @@ namespace MDC.Server.Data.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("UserDetails");
+                    b.ToTable("UserDatails");
                 });
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Users.UserEvent", b =>
@@ -471,7 +468,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<short>("RoleId")
                         .HasColumnType("smallint");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
@@ -502,7 +499,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<short>("LanguageId")
                         .HasColumnType("smallint");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
@@ -713,7 +710,7 @@ namespace MDC.Server.Data.Migrations
 
                     b.HasOne("MDC.Server.Domain.Entities.Users.User", "Speaker")
                         .WithMany()
-                        .HasForeignKey("SpeakerId1");
+                        .HasForeignKey("SpeakerId");
 
                     b.Navigation("Event");
 

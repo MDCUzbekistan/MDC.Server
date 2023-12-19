@@ -1,12 +1,13 @@
-﻿using MDC.Server.Domain.Entities.Users;
-using MDC.Server.Domain.Entities.Events;
+﻿using MDC.Server.Service.DTOs.Users;
+using MDC.Server.Service.DTOs.Events;
+using MDC.Server.Service.DTOs.EventRoles;
 
 namespace MDC.Server.Service.DTOs.UserEvents;
 
 public class UserEventForResultDto
 {
     public long Id { get; set; }
-    public User User { get; set; }
-    public Event Event { get; set; }
-    public EventRole Role { get; set; }
+    public UserForResultDto User { get; set; }
+    public EventForResultDto Event { get; set; }
+    public EventRoleForResultDto Role { get; set; }
 }

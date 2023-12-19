@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MDC.Server.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentityDbContextMigration : Migration
+    public partial class IdentityMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,7 +67,7 @@ namespace MDC.Server.Data.Migrations
                     Logo = table.Column<string>(type: "text", nullable: true),
                     ParentId = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -88,7 +88,7 @@ namespace MDC.Server.Data.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,7 +104,7 @@ namespace MDC.Server.Data.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -120,7 +120,7 @@ namespace MDC.Server.Data.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -137,7 +137,7 @@ namespace MDC.Server.Data.Migrations
                     Latitude = table.Column<long>(type: "bigint", nullable: false),
                     Address = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -262,7 +262,7 @@ namespace MDC.Server.Data.Migrations
                     Position = table.Column<string>(type: "text", nullable: true),
                     SpeechImage = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -284,7 +284,7 @@ namespace MDC.Server.Data.Migrations
                     Image = table.Column<string>(type: "text", nullable: true),
                     Resume = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -306,7 +306,7 @@ namespace MDC.Server.Data.Migrations
                     CommunityId = table.Column<long>(type: "bigint", nullable: false),
                     RoleId = table.Column<short>(type: "smallint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -339,7 +339,7 @@ namespace MDC.Server.Data.Migrations
                     UserId = table.Column<string>(type: "text", nullable: true),
                     LanguageId = table.Column<short>(type: "smallint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -372,7 +372,7 @@ namespace MDC.Server.Data.Migrations
                     StartAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     EndAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -393,7 +393,7 @@ namespace MDC.Server.Data.Migrations
                     EventId = table.Column<long>(type: "bigint", nullable: false),
                     Image = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -417,17 +417,16 @@ namespace MDC.Server.Data.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     StartAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     EndAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    SpeakerId = table.Column<long>(type: "bigint", nullable: false),
-                    SpeakerId1 = table.Column<string>(type: "text", nullable: true),
+                    SpeakerId = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EventSessions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EventSessions_AspNetUsers_SpeakerId1",
-                        column: x => x.SpeakerId1,
+                        name: "FK_EventSessions_AspNetUsers_SpeakerId",
+                        column: x => x.SpeakerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -448,7 +447,7 @@ namespace MDC.Server.Data.Migrations
                     EventId = table.Column<long>(type: "bigint", nullable: false),
                     RoleId = table.Column<short>(type: "smallint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -525,9 +524,9 @@ namespace MDC.Server.Data.Migrations
                 column: "EventId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EventSessions_SpeakerId1",
+                name: "IX_EventSessions_SpeakerId",
                 table: "EventSessions",
-                column: "SpeakerId1");
+                column: "SpeakerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_LocationId",

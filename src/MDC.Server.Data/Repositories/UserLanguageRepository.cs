@@ -4,9 +4,9 @@ using MDC.Server.Domain.Entities.Users;
 
 namespace MDC.Server.Data.Repositories;
 
-public class UserDetailRepository : Repository<UserDetail, long>, IUserDetailRepository
+public class UserLanguageRepository : Repository<UserLanguage, long>, IUserLanguageRepository
 {
-    public UserDetailRepository(MDCDbContext dbContext) : base(dbContext)
+    public UserLanguageRepository(MDCDbContext dbContext) : base(dbContext)
     {
     }
 }

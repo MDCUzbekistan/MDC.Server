@@ -74,7 +74,7 @@ public class EventService : IEventService
     public async Task<IEnumerable<EventForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
         var events = await _repository.SelectAll()
-            .ToPagedList(@params)
+            .ToPagedList<Event, long>(@params)
             .AsNoTracking()
             .ToListAsync();
 
