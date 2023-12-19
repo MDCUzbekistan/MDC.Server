@@ -10,7 +10,7 @@ namespace MDC.Server.Domain.Entities.Users
 {
     public class UserEvent : Auditable<long>
     {
-        public long UserId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
 
         public long EventId { get; set; }

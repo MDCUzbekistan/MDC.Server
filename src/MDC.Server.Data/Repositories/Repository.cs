@@ -7,10 +7,10 @@ namespace MDC.Server.Data.Repositories;
 
 public class Repository<TEntity, TKey> : IRepository<TEntity,TKey> where TEntity : Auditable<TKey>
 {
-    protected readonly MDCServerDbContext _dbContext;
+    protected readonly MDCDbContext _dbContext;
     protected readonly DbSet<TEntity> _dbSet;
 
-    public Repository(MDCServerDbContext dbContext)
+    public Repository(MDCDbContext dbContext)
     {
         _dbContext = dbContext;
         _dbSet = _dbContext.Set<TEntity>();

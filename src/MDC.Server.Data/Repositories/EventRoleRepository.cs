@@ -6,6 +6,6 @@ namespace MDC.Server.Data.Repositories;
 
 public class EventRoleRepository : Repository<EventRole, short>, IEventRoleRepository
 {
-    public EventRoleRepository(MDCServerDbContext dbContext) : base(dbContext)
+    public EventRoleRepository(MDCDbContext dbContext) : base(dbContext)
     { }
 }

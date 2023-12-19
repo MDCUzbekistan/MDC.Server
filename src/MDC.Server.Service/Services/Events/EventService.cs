@@ -35,17 +35,6 @@ public class EventService : IEventService
         {
             throw new MDCException(404, "Start date is greater than end date ");
         }
-       
-        var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.Banner.FileName);
-        var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "Events", fileName);
-        using (var stream = new FileStream(rootPath, FileMode.Create))
-        {
-            await dto.Banner.CopyToAsync(stream);
-            await stream.FlushAsync();
-            stream.Close();
-        }
-        string resultImage = Path.Combine("Media", "Events", fileName);
-       
         
         var MappedData = this._mapper.Map<Event>(dto);
         var result = await _repository.InsertAsync(MappedData);
@@ -85,7 +74,7 @@ public class EventService : IEventService
     public async Task<IEnumerable<EventForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
         var events = await _repository.SelectAll()
-            .ToPagedList(@params)
+            .ToPagedList<Event, long>(@params)
             .AsNoTracking()
             .ToListAsync();
 
