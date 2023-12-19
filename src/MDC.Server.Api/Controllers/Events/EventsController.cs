@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MDC.Server.Api.Controllers.Events
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class EventsController : ControllerBase
+    public class EventsController : BaseController
     {
         private readonly IEventService _eventService;
 
@@ -17,7 +15,7 @@ namespace MDC.Server.Api.Controllers.Events
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromForm] EventForCreationDto dto)
+        public async Task<IActionResult> PostAsync([FromBody] EventForCreationDto dto)
         => Ok(await this._eventService.CreateAsync(dto));
 
         [HttpGet]
@@ -29,7 +27,7 @@ namespace MDC.Server.Api.Controllers.Events
             => Ok(await this._eventService.RetrieveByIdAsync(id));
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromForm] EventForUpdateDto dto)
+        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] EventForUpdateDto dto)
             => Ok(await this._eventService.ModifyAsync(id, dto));
 
         [HttpDelete("{id}")]

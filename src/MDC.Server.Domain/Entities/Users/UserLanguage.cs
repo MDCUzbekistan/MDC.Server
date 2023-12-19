@@ -9,7 +9,7 @@ namespace MDC.Server.Domain.Entities.Users
 {
     public class UserLanguage : Auditable<long>
     {
-        public long UserId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
 
         public short LanguageId { get; set; }
