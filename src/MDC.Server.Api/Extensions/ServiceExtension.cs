@@ -53,6 +53,7 @@ public static class ServiceExtension
         // Communities
         services.AddScoped<ICommunityService,CommunityService>();
         services.AddScoped<ICommunityRepository, CommunityRepository>();
+        services.AddScoped<ICommunityImageRepository, CommunityImageRepository>();
 
         // Events
         services.AddScoped<IEventService, EventService>();
