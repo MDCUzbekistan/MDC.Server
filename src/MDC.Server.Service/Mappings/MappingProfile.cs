@@ -18,6 +18,7 @@ using MDC.Server.Service.DTOs.Events;
 using MDC.Server.Service.DTOs.EventAssets;
 using MDC.Server.Domain.Entities.References;
 using MDC.Server.Domain.Entities.Communities;
+using MDC.Server.Service.DTOs.UserDetails;
 
 namespace MDC.Server.Service.Mappings;
 

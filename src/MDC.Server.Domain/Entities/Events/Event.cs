@@ -1,6 +1,7 @@
 ﻿using MDC.Server.Domain.Enums;
 using MDC.Server.Domain.Commons;
 using MDC.Server.Domain.Entities.Users;
+using MDC.Server.Domain.Entities.References;
 
 namespace MDC.Server.Domain.Entities.Events
 {
