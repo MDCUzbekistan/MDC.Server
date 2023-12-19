@@ -40,7 +40,8 @@ public static class ServiceExtension
         services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 
         //User
-        
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserService, UserService>();
 
         // UserDetail
         services.AddScoped<IUserDetailRepository, UserDetailRepository>();  
