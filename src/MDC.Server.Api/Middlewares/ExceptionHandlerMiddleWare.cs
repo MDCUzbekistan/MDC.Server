@@ -24,7 +24,7 @@ namespace MDC.Server.Api.Middlewares
                 context.Response.StatusCode = ex.StatusCode;
                 await context.Response.WriteAsJsonAsync(new Response
                 {
-                    StatusCode = ex.StatusCode,
+                    Code = ex.StatusCode,
                     Message = ex.Message
                 });
             }
@@ -34,7 +34,7 @@ namespace MDC.Server.Api.Middlewares
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsJsonAsync(new Response
                 {
-                    StatusCode = 500,
+                    Code = 500,
                     Message = ex.Message
                 });
             }
