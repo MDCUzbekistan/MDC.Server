@@ -21,9 +21,4 @@
 
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\Users\" />
-    <Folder Include="Services\Users\" />
-  </ItemGroup>
-
 </Project>
