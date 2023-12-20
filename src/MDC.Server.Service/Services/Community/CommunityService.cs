@@ -223,9 +223,9 @@ public  class CommunityService : ICommunityService
             throw new MDCException(404, "Community is not found");
 
         // Delete the existing Banner file if needed
-        if (!string.IsNullOrEmpty(community.Logo))
+        if (!string.IsNullOrEmpty(community.Banner))
         {
-            var existingLogoPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, community.Logo);
+            var existingLogoPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, community.Banner);
             if (File.Exists(existingLogoPath))
             {
                 File.Delete(existingLogoPath);

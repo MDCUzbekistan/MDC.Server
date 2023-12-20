@@ -24,8 +24,4 @@
     <ProjectReference Include="..\MDC.Server.Domain\MDC.Server.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

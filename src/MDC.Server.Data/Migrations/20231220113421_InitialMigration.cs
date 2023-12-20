@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MDC.Server.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class CommunityMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,6 +33,8 @@ namespace MDC.Server.Data.Migrations
                     Id = table.Column<string>(type: "text", nullable: false),
                     FirstName = table.Column<string>(type: "text", nullable: true),
                     LastName = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -72,6 +74,11 @@ namespace MDC.Server.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Communities", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Communities_Communities_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "Communities",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -502,6 +509,11 @@ namespace MDC.Server.Data.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Communities_ParentId",
+                table: "Communities",
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EventAssets_EventId",
