@@ -12,7 +12,7 @@ namespace MDC.Server.Api.Controllers.SpeakerDetails
         private readonly ISpeakerDetailService _speakerDetailService;
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync([FromBody] SpeakerDetailForCreationDto dto)
+        public async Task<IActionResult> AddAsync([FromForm] SpeakerDetailForCreationDto dto)
             => Ok(await _speakerDetailService.AddAsync(dto));
 
         [HttpGet]
@@ -24,7 +24,7 @@ namespace MDC.Server.Api.Controllers.SpeakerDetails
             => Ok(await _speakerDetailService.RetrieveByIdAsync(id));
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> ModifyAsync([FromRoute] long id, SpeakerDetailForUpdateDto dto)
+        public async Task<IActionResult> ModifyAsync([FromForm] long id, SpeakerDetailForUpdateDto dto)
            => Ok(await _speakerDetailService.ModifyAsync(id, dto));
 
         [HttpDelete("{id}")]

@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using MDC.Server.Service.Helpers;
-using MDC.Server.Data.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using MDC.Server.Service.Exceptions;
+using MDC.Server.Domain.Configurations;
 using MDC.Server.Domain.Entities.Users;
+using MDC.Server.Service.Commons.Extensions;
 using MDC.Server.Service.DTOs.SpeakerDetails;
 using MDC.Server.Data.IRepositories.SpeakerDetails;
 using MDC.Server.Service.Interfaces.SpeakerDetails;
-using MDC.Server.Domain.Configurations;
-using MDC.Server.Service.Commons.Extensions;
 
 namespace MDC.Server.Service.Services.SpeakerDetails
 {
@@ -29,7 +28,7 @@ namespace MDC.Server.Service.Services.SpeakerDetails
         public async Task<bool> RemoveAsync(long id)
         {
             var removeSpeaker = _speakerDetailRepository.SelectAll()
-                 .Where(s => s.Id == id)
+                 .Where(sd => sd.Id == id)
                  .FirstOrDefaultAsync() ??
                     throw new MDCException(404, "Speaker is not found! ");
 
@@ -46,7 +45,7 @@ namespace MDC.Server.Service.Services.SpeakerDetails
         public async Task<SpeakerDetailForResultDto> RetrieveByIdAsync(long id)
         {
             var byIdSpeaker = await _speakerDetailRepository.SelectAll()
-                 .Where(s => s.Id == id)
+                 .Where(sd => sd.Id == id)
                  .AsNoTracking()
                  .FirstOrDefaultAsync() ??
                      throw new MDCException(404, "Speaker is not found!");
@@ -58,7 +57,7 @@ namespace MDC.Server.Service.Services.SpeakerDetails
         public async Task<IEnumerable<SpeakerDetailForResultDto>> RetrieveAllAsync(PaginationParams @params)
         {
             var allSpeaker = await _speakerDetailRepository.SelectAll()
-                .Include(s => s.UserId)
+                .Include(sd => sd.UserId)
                 .AsNoTracking()
                 .ToPagedList<SpeakerDetail, long> (@params)
                 .ToListAsync();
@@ -69,16 +68,16 @@ namespace MDC.Server.Service.Services.SpeakerDetails
 
         public async Task<SpeakerDetailForResultDto> AddAsync(SpeakerDetailForCreationDto dto)
         {
-            var user = await _speakerDetailRepository.SelectAll()
-                 .Where(u => u.UserId == dto.UserId)
+            var addSpeaker = await _speakerDetailRepository.SelectAll()
+                 .Where(sd => sd.UserId == dto.UserId)
                  .AsNoTracking()
                  .FirstOrDefaultAsync();
 
-            if (user != null)
+            if (addSpeaker != null)
                 throw new MDCException(409, "User is alrady exist! ");
 
             var fileName = Guid.NewGuid().ToString() + Path.GetExtension(dto.SpeechImage.FileName);
-            var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "SpeechImage", fileName);
+            var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "SpeechImages", fileName);
             using (var stream = new FileStream(rootPath, FileMode.Create))
             {
                 await dto.SpeechImage.CopyToAsync(stream);
@@ -89,7 +88,7 @@ namespace MDC.Server.Service.Services.SpeakerDetails
             var mappedSpeaker = new SpeakerDetail()
             {
                 UserId = dto.UserId,
-                SpeechImage = Path.Combine("SpeechImage", dto.SpeechImage.FileName),
+                SpeechImage = Path.Combine("SpeechImages", dto.SpeechImage.FileName),
                 CreatedAt = DateTime.UtcNow
             };
 
@@ -103,7 +102,7 @@ namespace MDC.Server.Service.Services.SpeakerDetails
         public async Task<SpeakerDetailForResultDto> ModifyAsync(long id, SpeakerDetailForUpdateDto dto)
         {
             var updateSpeaker = await _speakerDetailRepository.SelectAll()
-                 .Where(s => s.Id == id)
+                 .Where(sd => sd.Id == id)
                  .FirstOrDefaultAsync() ??
                     throw new MDCException(404, "Speaker not faund! ");
 
@@ -113,7 +112,7 @@ namespace MDC.Server.Service.Services.SpeakerDetails
                 File.Delete(speechImageFullPath);
 
             var fileName = Guid.NewGuid().ToString() + Path.GetExtension(dto.SpeechImage.FileName);
-            var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "SpeechImage", fileName);
+            var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "SpeechImages", fileName);
             using (var stream = new FileStream(rootPath, FileMode.Create))
             {
                 await dto.SpeechImage.CopyToAsync(stream);

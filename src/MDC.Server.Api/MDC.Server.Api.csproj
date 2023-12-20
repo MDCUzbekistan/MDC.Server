@@ -31,6 +31,7 @@
     <Folder Include="wwwroot\Media\Community\Banners\" />
     <Folder Include="wwwroot\Media\Community\Logos\" />
     <Folder Include="wwwroot\Media\Events\" />
+    <Folder Include="wwwroot\Media\SpeakerDetails\SpeechImages\" />
     <Folder Include="wwwroot\Media\UserDetails\Images\" />
     <Folder Include="wwwroot\Media\UserDetails\Resumes\" />
   </ItemGroup>
