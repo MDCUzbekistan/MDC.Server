@@ -56,6 +56,8 @@ namespace MDC.Server.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentId");
+
                     b.ToTable("Communities");
 
                     b.HasData(
@@ -1369,6 +1371,15 @@ namespace MDC.Server.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("MDC.Server.Domain.Entities.Communities.Community", b =>
+                {
+                    b.HasOne("MDC.Server.Domain.Entities.Communities.Community", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Communities.UserCommunity", b =>

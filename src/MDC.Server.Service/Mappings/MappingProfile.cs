@@ -14,6 +14,7 @@ using MDC.Server.Domain.Entities.Communities;
 using MDC.Server.Service.DTOs.EventAssets;
 using MDC.Server.Service.DTOs.UserDetails;
 using MDC.Server.Service.DTOs.CommunityImage;
+using MDC.Server.Service.DTOs.CommunityRoles;
 
 namespace MDC.Server.Service.Mappings;
 

@@ -46,12 +46,11 @@ namespace MDC.Server.Api.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="id"></param>
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromForm] UserDetailForUpdateDto dto)
-            => Ok(await this._userDetailService.ModifyAsync(id, dto));
+        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")][FromForm] UserDetailForUpdateDto dto)
+            => Ok(await this._userDetailService.ModifyAsync(dto));
 
         /// <summary>
         /// 
