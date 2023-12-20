@@ -2,23 +2,18 @@ using AutoMapper;
 using MDC.Server.Service.DTOs.Users;
 using MDC.Server.Service.DTOs.Events;
 using MDC.Server.Domain.Entities.Users;
-using MDC.Server.Service.DTOs.Languages;
-using MDC.Server.Service.DTOs.Community;
 using MDC.Server.Domain.Entities.Events;
+using MDC.Server.Service.DTOs.Community;
+using MDC.Server.Service.DTOs.Languages;
 using MDC.Server.Service.DTOs.EventRoles;
 using MDC.Server.Service.DTOs.UserEvents;
+using MDC.Server.Service.DTOs.UserDetails;
+using MDC.Server.Service.DTOs.EventAssets;
 using MDC.Server.Service.DTOs.UserLanguages;
 using MDC.Server.Domain.Entities.References;
 using MDC.Server.Service.DTOs.CommunityRoles;
 using MDC.Server.Domain.Entities.Communities;
-using MDC.Server.Service.DTOs.Users;
-using MDC.Server.Service.DTOs.CommunityRoles;
-using MDC.Server.Service.DTOs.Events;
-
-using MDC.Server.Service.DTOs.EventAssets;
-using MDC.Server.Domain.Entities.References;
-using MDC.Server.Domain.Entities.Communities;
-using MDC.Server.Service.DTOs.UserDetails;
+using MDC.Server.Service.DTOs.UserCommunities;
 
 namespace MDC.Server.Service.Mappings;
 
@@ -33,7 +28,7 @@ public class MappingProfile : Profile
         CreateMap<UserLanguage, UserLanguageForResultDto>().ReverseMap();
         CreateMap<UserLanguage, UserLanguageForUpdateDto>().ReverseMap();
 
-        //Users
+        // Users
         CreateMap<User, UserForUpdateDto>().ReverseMap();
         CreateMap<User, UserForResultDto>().ReverseMap();
         CreateMap<User, UserForCreationDto>().ReverseMap();
@@ -58,29 +53,35 @@ public class MappingProfile : Profile
         CreateMap<UserDetail, UserDetailForUpdateDto>().ReverseMap();
         CreateMap<UserDetail, UserDetailForCreationDto>().ReverseMap();
 
-        //Languages
+        // Languages
         CreateMap<Language, LanguageForUpdateDto>().ReverseMap();
         CreateMap<Language, LanguageForResultDto>().ReverseMap();
         CreateMap<Language, LanguageForCreationDto>().ReverseMap();
 
-        ///Communities
+        // Communities
         CreateMap<Community, CommunityForResultDto>().ReverseMap();
         CreateMap<Community, CommunityForUpdateDto>().ReverseMap();
         CreateMap<Community, CommunityForCreationDto>().ReverseMap();
+
         // Event
         CreateMap<Event, EventForCreationDto>().ReverseMap();
         CreateMap<Event, EventForUpdateDto>().ReverseMap();
         CreateMap<Event, EventForResultDto>().ReverseMap();
+
         // EventAsset
         CreateMap<EventAsset, EventAssetForCreationDto>().ReverseMap();
         CreateMap<EventAsset, EventAssetForUpdateDto>().ReverseMap();
         CreateMap<EventAsset, EventAssetForResultDto>().ReverseMap();
 
         // CommunityRole
-        CreateMap<CommunityRole,  CommunityRoleForCreationDto>().ReverseMap();
-        CreateMap<CommunityRole,  CommunityRoleForUpdateDto>().ReverseMap();
-        CreateMap<CommunityRole,  CommunityRoleForResultDto>().ReverseMap();
+        CreateMap<CommunityRole, CommunityRoleForCreationDto>().ReverseMap();
+        CreateMap<CommunityRole, CommunityRoleForUpdateDto>().ReverseMap();
+        CreateMap<CommunityRole, CommunityRoleForResultDto>().ReverseMap();
 
+        // UserCommunities
+        CreateMap<UserCommunity, UserCommunityForResultDto>().ReverseMap();
+        CreateMap<UserCommunity, UserCommunityForUpdateDto>().ReverseMap();
+        CreateMap<UserCommunity, UserCommunityForCreationDto>().ReverseMap();
         #endregion
 
     }
