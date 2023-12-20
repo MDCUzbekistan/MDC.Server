@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MDC.Server.Data.Migrations
 {
     [DbContext(typeof(MDCDbContext))]
-    [Migration("20231219111501_IdentityMigration")]
-    partial class IdentityMigration
+    [Migration("20231220070910_InitialMigrations")]
+    partial class InitialMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -166,6 +166,69 @@ namespace MDC.Server.Data.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("Events");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9054),
+                            Description = "Explore the latest in technology and innovation.",
+                            EndAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9053),
+                            Format = 0,
+                            LiveStreamUrl = "https://livestream.example.com/tech-conference",
+                            LocationId = 1L,
+                            StartAt = new DateTime(2024, 1, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9028),
+                            Status = 0,
+                            Title = "Tech Conference 2023"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            CreatedAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9057),
+                            Description = "Join us for a fitness extravaganza.",
+                            EndAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9056),
+                            Format = 3,
+                            LocationId = 2L,
+                            StartAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9056),
+                            Status = 0,
+                            Title = "Fitness Expo"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            CreatedAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9060),
+                            Description = "Discuss your favorite books with fellow bookworms.",
+                            EndAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9059),
+                            Format = 1,
+                            LocationId = 3L,
+                            StartAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9059),
+                            Status = 0,
+                            Title = "Book Club Meeting"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            CreatedAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9062),
+                            Description = "Discover and appreciate local artistic talent.",
+                            EndAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9062),
+                            Format = 0,
+                            LocationId = 4L,
+                            StartAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9061),
+                            Status = 0,
+                            Title = "Art Exhibition"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            CreatedAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9066),
+                            Description = "Join hands for a cleaner and greener community.",
+                            EndAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9064),
+                            Format = 0,
+                            LocationId = 5L,
+                            StartAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9064),
+                            Status = 4,
+                            Title = "Community Cleanup"
+                        });
                 });
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Events.EventAsset", b =>
@@ -311,7 +374,49 @@ namespace MDC.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Location");
+                    b.ToTable("Locations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Address = "123 Main St",
+                            CreatedAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(8875),
+                            Latitude = 789012L,
+                            Longitude = 123456L
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Address = "456 Oak Ave",
+                            CreatedAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(8877),
+                            Latitude = 210987L,
+                            Longitude = 654321L
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Address = "789 Elm St",
+                            CreatedAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(8878),
+                            Latitude = 333444L,
+                            Longitude = 111222L
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Address = "987 Pine Ave",
+                            CreatedAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(8879),
+                            Latitude = 777888L,
+                            Longitude = 555666L
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Address = "654 Birch Ln",
+                            CreatedAt = new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(8881),
+                            Latitude = 123789L,
+                            Longitude = 999000L
+                        });
                 });
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Users.SpeakerDetail", b =>
@@ -362,6 +467,9 @@ namespace MDC.Server.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("timestamp with time zone");
 
@@ -374,6 +482,9 @@ namespace MDC.Server.Data.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("text");
+
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("LastName")
                         .HasColumnType("text");
@@ -406,6 +517,9 @@ namespace MDC.Server.Data.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
