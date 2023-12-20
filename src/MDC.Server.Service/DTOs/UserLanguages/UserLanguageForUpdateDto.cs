@@ -2,6 +2,6 @@
 
 public class UserLanguageForUpdateDto
 {
-    public long UserId { get; set; }
+    public string UserId { get; set; }
     public short LanguageId { get; set; }
 }
