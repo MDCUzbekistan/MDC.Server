@@ -4,10 +4,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace MDC.Server.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentityMigration : Migration
+    public partial class InitialMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,8 +33,11 @@ namespace MDC.Server.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
+                    Guid = table.Column<Guid>(type: "uuid", nullable: false),
                     FirstName = table.Column<string>(type: "text", nullable: true),
                     LastName = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -128,7 +133,7 @@ namespace MDC.Server.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Location",
+                name: "Locations",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -141,7 +146,7 @@ namespace MDC.Server.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Location", x => x.Id);
+                    table.PrimaryKey("PK_Locations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -378,9 +383,9 @@ namespace MDC.Server.Data.Migrations
                 {
                     table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Events_Location_LocationId",
+                        name: "FK_Events_Locations_LocationId",
                         column: x => x.LocationId,
-                        principalTable: "Location",
+                        principalTable: "Locations",
                         principalColumn: "Id");
                 });
 
@@ -469,6 +474,30 @@ namespace MDC.Server.Data.Migrations
                         principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Locations",
+                columns: new[] { "Id", "Address", "CreatedAt", "Latitude", "Longitude", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1L, "123 Main St", new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(8875), 789012L, 123456L, null },
+                    { 2L, "456 Oak Ave", new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(8877), 210987L, 654321L, null },
+                    { 3L, "789 Elm St", new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(8878), 333444L, 111222L, null },
+                    { 4L, "987 Pine Ave", new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(8879), 777888L, 555666L, null },
+                    { 5L, "654 Birch Ln", new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(8881), 123789L, 999000L, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Events",
+                columns: new[] { "Id", "CreatedAt", "Description", "EndAt", "Format", "LiveStreamUrl", "LocationId", "StartAt", "Status", "Title", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1L, new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9054), "Explore the latest in technology and innovation.", new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9053), 0, "https://livestream.example.com/tech-conference", 1L, new DateTime(2024, 1, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9028), 0, "Tech Conference 2023", null },
+                    { 2L, new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9057), "Join us for a fitness extravaganza.", new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9056), 3, null, 2L, new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9056), 0, "Fitness Expo", null },
+                    { 3L, new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9060), "Discuss your favorite books with fellow bookworms.", new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9059), 1, null, 3L, new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9059), 0, "Book Club Meeting", null },
+                    { 4L, new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9062), "Discover and appreciate local artistic talent.", new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9062), 0, null, 4L, new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9061), 0, "Art Exhibition", null },
+                    { 5L, new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9066), "Join hands for a cleaner and greener community.", new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9064), 0, null, 5L, new DateTime(2023, 12, 20, 7, 9, 10, 343, DateTimeKind.Utc).AddTicks(9064), 4, "Community Cleanup", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -646,7 +675,7 @@ namespace MDC.Server.Data.Migrations
                 name: "Languages");
 
             migrationBuilder.DropTable(
-                name: "Location");
+                name: "Locations");
         }
     }
 }
