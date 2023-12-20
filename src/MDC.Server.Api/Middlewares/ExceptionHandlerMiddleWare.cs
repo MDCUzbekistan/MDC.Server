@@ -30,7 +30,7 @@ namespace MDC.Server.Api.Middlewares
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}\n\n");
+                _logger.LogError($"{ex.Message}\n\n");
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsJsonAsync(new Response
                 {

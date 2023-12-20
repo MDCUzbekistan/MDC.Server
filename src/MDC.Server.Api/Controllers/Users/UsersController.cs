@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MDC.Server.Service.DTOs.Users;
 using MDC.Server.Service.Interfaces.Users;
+using MDC.Server.Domain.Configurations;
 
 namespace MDC.Server.Api.Controllers.Users;
 
@@ -18,8 +19,8 @@ public class UsersController:BaseController
         =>Ok(await _userService.CreateAsync(dto));
 
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
-        =>Ok(await _userService.RetrieveAllAsync());
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
+        =>Ok(await _userService.RetrieveAllAsync(@params));
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] string id)
