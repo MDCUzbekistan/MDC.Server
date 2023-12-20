@@ -11,6 +11,11 @@ namespace MDC.Server.Api.Controllers.SpeakerDetails
     {
         private readonly ISpeakerDetailService _speakerDetailService;
 
+        public SpeakerDetailsController(ISpeakerDetailService speakerDetailService)
+        {
+            _speakerDetailService = speakerDetailService;
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddAsync([FromForm] SpeakerDetailForCreationDto dto)
             => Ok(await _speakerDetailService.AddAsync(dto));

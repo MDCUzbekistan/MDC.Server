@@ -18,7 +18,7 @@ namespace MDC.Server.Data.DbContexts
         public DbSet<UserEvent> UserEvents { get; set; }
         public DbSet<EventRole> EventRoles { get; set; }
         public DbSet<Community> Communities { get; set; }
-        public DbSet<UserDetail> UserDatails { get; set; }
+        public DbSet<UserDetail> UserDetails { get; set; }
         public DbSet<EventAsset> EventAssets { get; set; }
         public DbSet<EventSession> EventSessions { get; set; }
         public DbSet<UserLanguage> UserLanguages { get; set; }
