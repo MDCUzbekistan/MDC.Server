@@ -75,6 +75,8 @@ public class EventService : IEventService
     {
         var events = await _repository.SelectAll()
             .ToPagedList<Event, long>(@params)
+            .Include(ue => ue.Users)
+            .Include(es => es.Sessions)
             .AsNoTracking()
             .ToListAsync();
 
@@ -83,9 +85,11 @@ public class EventService : IEventService
 
     public async Task<EventForResultDto> RetrieveByIdAsync(long id)
     {
-        var @event = await _repository.SelectAll().
-           Where(e => e.Id == id).
-           FirstOrDefaultAsync();
+        var @event = await _repository.SelectAll()
+           .Where(e => e.Id == id)
+           .Include(ue => ue.Users)
+           .Include(es => es.Sessions)
+           .FirstOrDefaultAsync();
 
         if (@event is null)
             throw new MDCException(404, "Event is not found");
