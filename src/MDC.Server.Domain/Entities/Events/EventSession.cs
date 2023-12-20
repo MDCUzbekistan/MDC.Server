@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MDC.Server.Domain.Entities.Events
 {
-    public class EventSession : Auditable<long>
+    public class EventSessionForResultDto : Auditable<long>
     {
         public long EventId { get; set; }
         public Event Event { get; set; }
