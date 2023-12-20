@@ -19,6 +19,7 @@ using MDC.Server.Service.DTOs.EventAssets;
 using MDC.Server.Domain.Entities.References;
 using MDC.Server.Domain.Entities.Communities;
 using MDC.Server.Service.DTOs.UserDetails;
+using MDC.Server.Service.DTOs.SpeakerDetails;
 
 namespace MDC.Server.Service.Mappings;
 
@@ -75,6 +76,11 @@ public class MappingProfile : Profile
         CreateMap<EventAsset, EventAssetForCreationDto>().ReverseMap();
         CreateMap<EventAsset, EventAssetForUpdateDto>().ReverseMap();
         CreateMap<EventAsset, EventAssetForResultDto>().ReverseMap();
+
+        // SpeakerDetail
+        CreateMap<SpeakerDetail, SpeakerDetailForCreationDto>().ReverseMap();
+        CreateMap<SpeakerDetail, SpeakerDetailForResultDto>().ReverseMap();
+        CreateMap<SpeakerDetail, SpeakerDetailForUpdateDto>().ReverseMap();
         #endregion
 
     }
