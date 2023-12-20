@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MDC.Server.Data.Migrations
 {
     [DbContext(typeof(MDCDbContext))]
-    [Migration("20231220090447_UserIdModifyMigrations")]
-    partial class UserIdModifyMigrations
+    [Migration("20231220125459_RegionModifyMigrations")]
+    partial class RegionModifyMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,7 +54,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -69,50 +69,55 @@ namespace MDC.Server.Data.Migrations
                             Id = 1L,
                             Banner = "tech_banner.jpg",
                             Bio = "Explore the latest in tech trends.",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6867),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3053),
                             Description = "A community for technology enthusiasts.",
                             Logo = "tech_logo.png",
-                            Title = "Tech Enthusiasts"
+                            Title = "Tech Enthusiasts",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2L,
                             Banner = "outdoor_banner.jpg",
                             Bio = "Connect with nature and fellow adventurers.",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6869),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3055),
                             Description = "For those who love outdoor activities.",
                             Logo = "outdoor_logo.png",
-                            Title = "Outdoor Adventures"
+                            Title = "Outdoor Adventures",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3L,
                             Banner = "books_banner.jpg",
                             Bio = "Discuss your favorite books and discover new ones.",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6871),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3057),
                             Description = "A community for bookworms and literature enthusiasts.",
                             Logo = "books_logo.png",
-                            Title = "Book Lovers Club"
+                            Title = "Book Lovers Club",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4L,
                             Banner = "fitness_banner.jpg",
                             Bio = "Share workout tips and stay motivated.",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6927),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3058),
                             Description = "For fitness enthusiasts and health-conscious individuals.",
                             Logo = "fitness_logo.png",
-                            Title = "Fitness Fanatics"
+                            Title = "Fitness Fanatics",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5L,
                             Banner = "art_banner.jpg",
                             Bio = "Connect with fellow artists and creators.",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6929),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3059),
                             Description = "Explore and share your artistic side.",
                             Logo = "art_logo.png",
-                            Title = "Art and Creativity"
+                            Title = "Art and Creativity",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -133,7 +138,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -144,37 +149,42 @@ namespace MDC.Server.Data.Migrations
                         new
                         {
                             Id = (short)1,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6969),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3146),
                             Description = "Community administrator role.",
-                            Name = "Administrator"
+                            Name = "Administrator",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = (short)2,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6971),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3147),
                             Description = "Standard community member role.",
-                            Name = "Member"
+                            Name = "Member",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = (short)3,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6972),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3148),
                             Description = "Community moderator role.",
-                            Name = "Moderator"
+                            Name = "Moderator",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = (short)4,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6974),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3149),
                             Description = "Guest role for limited access.",
-                            Name = "Guest"
+                            Name = "Guest",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = (short)5,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6975),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3150),
                             Description = "Community content editor role.",
-                            Name = "Editor"
+                            Name = "Editor",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -195,7 +205,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<short>("RoleId")
                         .HasColumnType("smallint");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
@@ -216,40 +226,45 @@ namespace MDC.Server.Data.Migrations
                         {
                             Id = 1L,
                             CommunityId = 1L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6713),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3232),
                             RoleId = (short)1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "1"
                         },
                         new
                         {
                             Id = 2L,
                             CommunityId = 2L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6715),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3233),
                             RoleId = (short)2,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "2"
                         },
                         new
                         {
                             Id = 3L,
                             CommunityId = 3L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6716),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3234),
                             RoleId = (short)1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "3"
                         },
                         new
                         {
                             Id = 4L,
                             CommunityId = 4L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6718),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3236),
                             RoleId = (short)3,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "4"
                         },
                         new
                         {
                             Id = 5L,
                             CommunityId = 5L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6719),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3237),
                             RoleId = (short)2,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "5"
                         });
                 });
@@ -289,7 +304,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -302,63 +317,68 @@ namespace MDC.Server.Data.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6183),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2656),
                             Description = "Explore the latest in technology and innovation.",
-                            EndAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6182),
+                            EndAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2655),
                             Format = 0,
                             LiveStreamUrl = "https://livestream.example.com/tech-conference",
                             LocationId = 1L,
-                            StartAt = new DateTime(2024, 1, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6169),
+                            StartAt = new DateTime(2024, 1, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2645),
                             Status = 0,
-                            Title = "Tech Conference 2023"
+                            Title = "Tech Conference 2023",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6188),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2660),
                             Description = "Join us for a fitness extravaganza.",
-                            EndAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6187),
+                            EndAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2659),
                             Format = 3,
                             LocationId = 2L,
-                            StartAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6186),
+                            StartAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2659),
                             Status = 0,
-                            Title = "Fitness Expo"
+                            Title = "Fitness Expo",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6191),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2662),
                             Description = "Discuss your favorite books with fellow bookworms.",
-                            EndAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6190),
+                            EndAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2662),
                             Format = 1,
                             LocationId = 3L,
-                            StartAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6189),
+                            StartAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2661),
                             Status = 0,
-                            Title = "Book Club Meeting"
+                            Title = "Book Club Meeting",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6195),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2664),
                             Description = "Discover and appreciate local artistic talent.",
-                            EndAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6194),
+                            EndAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2664),
                             Format = 0,
                             LocationId = 4L,
-                            StartAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6193),
+                            StartAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2663),
                             Status = 0,
-                            Title = "Art Exhibition"
+                            Title = "Art Exhibition",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6198),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2667),
                             Description = "Join hands for a cleaner and greener community.",
-                            EndAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6197),
+                            EndAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2666),
                             Format = 0,
                             LocationId = 5L,
-                            StartAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6197),
+                            StartAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2666),
                             Status = 4,
-                            Title = "Community Cleanup"
+                            Title = "Community Cleanup",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -379,7 +399,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -387,6 +407,48 @@ namespace MDC.Server.Data.Migrations
                     b.HasIndex("EventId");
 
                     b.ToTable("EventAssets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2717),
+                            EventId = 1L,
+                            Image = "event-asset-image-1.jpg",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2718),
+                            EventId = 2L,
+                            Image = "event-asset-image-2.jpg",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2719),
+                            EventId = 3L,
+                            Image = "event-asset-image-3.jpg",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2720),
+                            EventId = 4L,
+                            Image = "event-asset-image-4.jpg",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2721),
+                            EventId = 5L,
+                            Image = "event-asset-image-5.jpg",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("MDC.Server.Domain.Entities.Events.EventRole", b =>
@@ -406,7 +468,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -417,37 +479,42 @@ namespace MDC.Server.Data.Migrations
                         new
                         {
                             Id = (short)1,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6244),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2688),
                             Description = "Responsible for planning and managing the event.",
-                            Name = "Organizer"
+                            Name = "Organizer",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = (short)2,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6247),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2689),
                             Description = "Presenting talks or sessions during the event.",
-                            Name = "Speaker"
+                            Name = "Speaker",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = (short)3,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6248),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2690),
                             Description = "Attending the event without a specific role.",
-                            Name = "Participant"
+                            Name = "Participant",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = (short)4,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6250),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2690),
                             Description = "Assisting with various tasks during the event.",
-                            Name = "Volunteer"
+                            Name = "Volunteer",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = (short)5,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6251),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2691),
                             Description = "Supporting the event financially or with resources.",
-                            Name = "Sponsor"
+                            Name = "Sponsor",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -480,7 +547,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<DateTime?>("StartAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -495,57 +562,62 @@ namespace MDC.Server.Data.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6388),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2750),
                             Description = "An inspiring keynote to kick off the event.",
-                            EndAt = new DateTime(2024, 1, 21, 10, 4, 46, 648, DateTimeKind.Utc).AddTicks(6386),
+                            EndAt = new DateTime(2024, 1, 21, 13, 54, 58, 563, DateTimeKind.Utc).AddTicks(2748),
                             EventId = 1L,
                             Name = "Keynote Address",
                             SpeakerId = "1",
-                            StartAt = new DateTime(2024, 1, 21, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6373)
+                            StartAt = new DateTime(2024, 1, 21, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2743),
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6392),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2753),
                             Description = "A panel discussion on the future of technology.",
-                            EndAt = new DateTime(2024, 2, 22, 10, 4, 46, 648, DateTimeKind.Utc).AddTicks(6390),
+                            EndAt = new DateTime(2024, 2, 22, 13, 54, 58, 563, DateTimeKind.Utc).AddTicks(2752),
                             EventId = 2L,
                             Name = "Panel Discussion",
                             SpeakerId = "2",
-                            StartAt = new DateTime(2024, 2, 22, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6389)
+                            StartAt = new DateTime(2024, 2, 22, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2751),
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6396),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2755),
                             Description = "A discussion on the latest book club selection.",
-                            EndAt = new DateTime(2024, 3, 23, 10, 4, 46, 648, DateTimeKind.Utc).AddTicks(6394),
+                            EndAt = new DateTime(2024, 3, 23, 13, 54, 58, 563, DateTimeKind.Utc).AddTicks(2754),
                             EventId = 3L,
                             Name = "Book Club Discussion",
                             SpeakerId = "3",
-                            StartAt = new DateTime(2024, 3, 23, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6393)
+                            StartAt = new DateTime(2024, 3, 23, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2753),
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6399),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2758),
                             Description = "Hands-on workshop for aspiring artists.",
-                            EndAt = new DateTime(2024, 4, 24, 11, 4, 46, 648, DateTimeKind.Utc).AddTicks(6398),
+                            EndAt = new DateTime(2024, 4, 24, 14, 54, 58, 563, DateTimeKind.Utc).AddTicks(2757),
                             EventId = 4L,
                             Name = "Art Workshop",
                             SpeakerId = "4",
-                            StartAt = new DateTime(2024, 4, 24, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6397)
+                            StartAt = new DateTime(2024, 4, 24, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2756),
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6403),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2761),
                             Description = "Collaborative session to plan community initiatives.",
-                            EndAt = new DateTime(2024, 5, 25, 10, 4, 46, 648, DateTimeKind.Utc).AddTicks(6402),
+                            EndAt = new DateTime(2024, 5, 25, 13, 54, 58, 563, DateTimeKind.Utc).AddTicks(2760),
                             EventId = 5L,
                             Name = "Community Planning Session",
                             SpeakerId = "5",
-                            StartAt = new DateTime(2024, 5, 25, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6401)
+                            StartAt = new DateTime(2024, 5, 25, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2759),
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -566,7 +638,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -577,32 +649,37 @@ namespace MDC.Server.Data.Migrations
                         new
                         {
                             Id = (short)1,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(7018),
-                            Name = "English"
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2553),
+                            Name = "English",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = (short)2,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(7020),
-                            Name = "Uzbek"
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2554),
+                            Name = "Uzbek",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = (short)3,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(7022),
-                            Name = "French"
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2555),
+                            Name = "French",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = (short)4,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(7023),
-                            Name = "German"
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2556),
+                            Name = "German",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = (short)5,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(7025),
-                            Name = "Russian"
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2577),
+                            Name = "Russian",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -626,7 +703,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<long>("Longitude")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -638,41 +715,46 @@ namespace MDC.Server.Data.Migrations
                         {
                             Id = 1L,
                             Address = "123 Main St",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(5819),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2606),
                             Latitude = 789012L,
-                            Longitude = 123456L
+                            Longitude = 123456L,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2L,
                             Address = "456 Oak Ave",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(5825),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2607),
                             Latitude = 210987L,
-                            Longitude = 654321L
+                            Longitude = 654321L,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3L,
                             Address = "789 Elm St",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(5827),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2608),
                             Latitude = 333444L,
-                            Longitude = 111222L
+                            Longitude = 111222L,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4L,
                             Address = "987 Pine Ave",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(5828),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2609),
                             Latitude = 777888L,
-                            Longitude = 555666L
+                            Longitude = 555666L,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5L,
                             Address = "654 Birch Ln",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(5830),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2611),
                             Latitude = 123789L,
-                            Longitude = 999000L
+                            Longitude = 999000L,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -684,57 +766,62 @@ namespace MDC.Server.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Region");
+                    b.ToTable("Regions");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 649, DateTimeKind.Utc).AddTicks(8278),
-                            Description = "Northern part of the country",
-                            Name = "North Region"
+                            City = "City1",
+                            Country = "Country1",
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2408),
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 649, DateTimeKind.Utc).AddTicks(8282),
-                            Description = "Southern part of the country",
-                            Name = "South Region"
+                            City = "City2",
+                            Country = "Country2",
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2410),
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 649, DateTimeKind.Utc).AddTicks(8283),
-                            Description = "Eastern part of the country",
-                            Name = "East Region"
+                            City = "City3",
+                            Country = "Country3",
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2412),
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 649, DateTimeKind.Utc).AddTicks(8284),
-                            Description = "Western part of the country",
-                            Name = "West Region"
+                            City = "City4",
+                            Country = "Country4",
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2413),
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 649, DateTimeKind.Utc).AddTicks(8285),
-                            Description = "Central part of the country",
-                            Name = "Central Region"
+                            City = "City5",
+                            Country = "Country5",
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2413),
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -761,7 +848,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("SpeechImage")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
@@ -778,50 +865,55 @@ namespace MDC.Server.Data.Migrations
                         {
                             Id = 1L,
                             Company = "Tech Innovators",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6809),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3021),
                             ExperienceYear = (short)5,
                             Position = "Senior Software Engineer",
                             SpeechImage = "john_doe_speech_image.jpg",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "1"
                         },
                         new
                         {
                             Id = 2L,
                             Company = "Health & Wellness Solutions",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6812),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3023),
                             ExperienceYear = (short)8,
                             Position = "Lead Nutritionist",
                             SpeechImage = "jane_smith_speech_image.jpg",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "2"
                         },
                         new
                         {
                             Id = 3L,
                             Company = "Artistic Creations",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6814),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3024),
                             ExperienceYear = (short)10,
                             Position = "Chief Creative Officer",
                             SpeechImage = "michael_johnson_speech_image.jpg",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "3"
                         },
                         new
                         {
                             Id = 4L,
                             Company = "GreenTech Solutions",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6815),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3025),
                             ExperienceYear = (short)7,
                             Position = "Environmental Scientist",
                             SpeechImage = "emily_anderson_speech_image.jpg",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "4"
                         },
                         new
                         {
                             Id = 5L,
                             Company = "Innovative Designs",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6817),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3027),
                             ExperienceYear = (short)12,
                             Position = "Lead Architect",
                             SpeechImage = "william_taylor_speech_image.jpg",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "5"
                         });
                 });
@@ -909,9 +1001,9 @@ namespace MDC.Server.Data.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "30d10cb7-0bba-4ab1-9cbb-628095904929",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6553),
-                            DateOfBirth = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6551),
+                            ConcurrencyStamp = "21ac09da-439c-471d-b675-c85aa14e7c9c",
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2927),
+                            DateOfBirth = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2926),
                             Email = "john.doe@example.com",
                             EmailConfirmed = false,
                             FirstName = "John",
@@ -919,16 +1011,16 @@ namespace MDC.Server.Data.Migrations
                             LockoutEnabled = false,
                             PhoneNumber = "123456789",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3998e7b9-5810-4fe3-8537-fdf6cc251f6e",
+                            SecurityStamp = "b42b5e47-3640-41e0-a265-708fa38e2697",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "09b1b4b6-f05c-411b-9478-ae6fb5e56e2e",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6562),
-                            DateOfBirth = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6561),
+                            ConcurrencyStamp = "1cef9780-3448-4d14-b47e-082c69249088",
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2932),
+                            DateOfBirth = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2932),
                             Email = "jane.smith@example.com",
                             EmailConfirmed = false,
                             FirstName = "Jane",
@@ -936,16 +1028,16 @@ namespace MDC.Server.Data.Migrations
                             LockoutEnabled = false,
                             PhoneNumber = "987654321",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fc9b09b5-1c55-45eb-a981-5fc16eb98741",
+                            SecurityStamp = "203e1d4c-d0e2-4e1e-bbf8-485aea03b77d",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "64acbe06-7676-486f-80a2-9bd4601d7385",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6589),
-                            DateOfBirth = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6589),
+                            ConcurrencyStamp = "07ac8b55-a5b9-4d51-a0e0-4f88b55b8658",
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2938),
+                            DateOfBirth = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2938),
                             Email = "michael.johnson@example.com",
                             EmailConfirmed = false,
                             FirstName = "Michael",
@@ -953,16 +1045,16 @@ namespace MDC.Server.Data.Migrations
                             LockoutEnabled = false,
                             PhoneNumber = "555555555",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7280ad3a-d542-41be-a775-ca3cc0ad0f5c",
+                            SecurityStamp = "5f56940c-f870-411a-9af6-a4bad3c2847f",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "32d4d5d3-650d-46ac-ac8b-568ca308cbb8",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6596),
-                            DateOfBirth = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6595),
+                            ConcurrencyStamp = "eaca5e8b-5694-4ae0-834c-de9054dc496d",
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2942),
+                            DateOfBirth = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2942),
                             Email = "emily.anderson@example.com",
                             EmailConfirmed = false,
                             FirstName = "Emily",
@@ -970,16 +1062,16 @@ namespace MDC.Server.Data.Migrations
                             LockoutEnabled = false,
                             PhoneNumber = "333333333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "36389d01-1b8b-4ac8-8e59-783ee29c5716",
+                            SecurityStamp = "1a9c81fd-8713-4a36-b9ab-90d3c9e0a183",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "77f700dd-84d3-4b9a-ae7e-894ae71a2221",
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6607),
-                            DateOfBirth = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6606),
+                            ConcurrencyStamp = "35886f4e-72a9-482d-97b1-ecf1c47d3a61",
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2946),
+                            DateOfBirth = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(2946),
                             Email = "william.taylor@example.com",
                             EmailConfirmed = false,
                             FirstName = "William",
@@ -987,7 +1079,7 @@ namespace MDC.Server.Data.Migrations
                             LockoutEnabled = false,
                             PhoneNumber = "777777777",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f560ae3b-99e6-486f-a285-50b00e791117",
+                            SecurityStamp = "b7ffacf8-84d8-42a0-a87a-877af4673f79",
                             TwoFactorEnabled = false
                         });
                 });
@@ -1009,7 +1101,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<string>("Resume")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
@@ -1029,6 +1121,7 @@ namespace MDC.Server.Data.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "john-doe-image-url",
                             Resume = "John Doe's resume details",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "1"
                         },
                         new
@@ -1037,6 +1130,7 @@ namespace MDC.Server.Data.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "jane-smith-image-url",
                             Resume = "Jane Smith's resume details",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "2"
                         },
                         new
@@ -1045,6 +1139,7 @@ namespace MDC.Server.Data.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "michael-johnson-image-url",
                             Resume = "Michael Johnson's resume details",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "3"
                         },
                         new
@@ -1053,6 +1148,7 @@ namespace MDC.Server.Data.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "emily-anderson-image-url",
                             Resume = "Emily Anderson's resume details",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "4"
                         },
                         new
@@ -1061,6 +1157,7 @@ namespace MDC.Server.Data.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "william-taylor-image-url",
                             Resume = "William Taylor's resume details",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "5"
                         });
                 });
@@ -1082,7 +1179,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<short>("RoleId")
                         .HasColumnType("smallint");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
@@ -1102,41 +1199,46 @@ namespace MDC.Server.Data.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6761),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3180),
                             EventId = 1L,
                             RoleId = (short)1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "1"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6763),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3181),
                             EventId = 2L,
                             RoleId = (short)2,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "2"
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6764),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3182),
                             EventId = 3L,
                             RoleId = (short)1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "3"
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6766),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3183),
                             EventId = 4L,
                             RoleId = (short)3,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "4"
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 12, 20, 9, 4, 46, 648, DateTimeKind.Utc).AddTicks(6767),
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3184),
                             EventId = 5L,
                             RoleId = (short)2,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "5"
                         });
                 });
@@ -1155,7 +1257,7 @@ namespace MDC.Server.Data.Migrations
                     b.Property<short>("LanguageId")
                         .HasColumnType("smallint");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
@@ -1168,6 +1270,48 @@ namespace MDC.Server.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserLanguages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3207),
+                            LanguageId = (short)1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "1"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3208),
+                            LanguageId = (short)2,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "2"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3209),
+                            LanguageId = (short)3,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "3"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3209),
+                            LanguageId = (short)4,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "4"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            CreatedAt = new DateTime(2023, 12, 20, 12, 54, 58, 563, DateTimeKind.Utc).AddTicks(3210),
+                            LanguageId = (short)5,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "5"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
