@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿    using Microsoft.AspNetCore.Mvc;
 using MDC.Server.Service.Interfaces;
 using MDC.Server.Domain.Configurations;
 using MDC.Server.Service.DTOs.UserEvents;

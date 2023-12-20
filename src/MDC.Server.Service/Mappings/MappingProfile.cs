@@ -11,7 +11,6 @@ using MDC.Server.Service.DTOs.UserDetails;
 using MDC.Server.Service.DTOs.EventAssets;
 using MDC.Server.Service.DTOs.UserLanguages;
 using MDC.Server.Domain.Entities.References;
-using MDC.Server.Service.DTOs.CommunityRoles;
 using MDC.Server.Domain.Entities.Communities;
 using MDC.Server.Service.DTOs.UserCommunities;
 
@@ -72,6 +71,7 @@ public class MappingProfile : Profile
         CreateMap<EventAsset, EventAssetForCreationDto>().ReverseMap();
         CreateMap<EventAsset, EventAssetForUpdateDto>().ReverseMap();
         CreateMap<EventAsset, EventAssetForResultDto>().ReverseMap();
+
 
         // CommunityRole
         CreateMap<CommunityRole, CommunityRoleForCreationDto>().ReverseMap();
