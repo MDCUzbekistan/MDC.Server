@@ -34,15 +34,31 @@ public class EventAssetService : IEventAssetService
         if (@event is null)
             throw new MDCException(404, "Event is not found");
 
+        var WwwRootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "EventAssets");
+        var assetsFolderPath = Path.Combine(WwwRootPath, "Media");
+        var ImagesFolderPath = Path.Combine(assetsFolderPath, "EventAssets");
+
+        if (!Directory.Exists(assetsFolderPath))
+        {
+            Directory.CreateDirectory(assetsFolderPath);
+        }
+
+        if (!Directory.Exists(ImagesFolderPath))
+        {
+            Directory.CreateDirectory(ImagesFolderPath);
+        }
         var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.Image.FileName);
-        var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "Events", fileName);
-        using (var stream = new FileStream(rootPath, FileMode.Create))
+
+        var fullPath = Path.Combine(WwwRootPath, fileName);
+
+        using (var stream = File.OpenWrite(fullPath))
         {
             await dto.Image.CopyToAsync(stream);
             await stream.FlushAsync();
             stream.Close();
         }
-        string resultImage = Path.Combine("Media", "Events", fileName);
+
+        string resultImage = Path.Combine("Media", "EventAssets", fileName);
 
         var mapped = _mapper.Map<EventAsset> (dto);
         mapped.Image = resultImage;
