@@ -17,6 +17,7 @@ using MDC.Server.Service.Interfaces.CommunityRoles;
 
 
 
+
 namespace MDC.Server.Api.Extensions;
 
 public static class ServiceExtension
@@ -40,7 +41,8 @@ public static class ServiceExtension
         services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 
         //User
-        
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserService, UserService>();
 
         // UserDetail
         services.AddScoped<IUserDetailRepository, UserDetailRepository>();  
@@ -63,7 +65,7 @@ public static class ServiceExtension
         services.AddScoped<IEventAssetReposiytory, EventAssetRepository>();
 
         // UserLanguages
-       // services.AddScoped<IUserLanguageService, UserLanguageService>();
+       services.AddScoped<IUserLanguageService, UserLanguageService>();
 
     }
 }
