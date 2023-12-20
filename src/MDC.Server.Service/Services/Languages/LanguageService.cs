@@ -65,7 +65,7 @@ public class LanguageService : ILanguageService
         if (language is null)
             throw new MDCException(404, "Language is not found");
 
-        return await _languageRepository.DeleteAsync(id); ;
+        return await _languageRepository.DeleteAsync(id);
     }
 
     public async Task<IEnumerable<LanguageForResultDto>> RetrieveAllAsync(PaginationParams @params)

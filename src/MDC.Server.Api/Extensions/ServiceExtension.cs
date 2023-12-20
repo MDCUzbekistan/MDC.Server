@@ -16,6 +16,8 @@ using MDC.Server.Service.Services.CommunityRoles;
 using MDC.Server.Service.Interfaces.CommunityRoles;
 using MDC.Server.Service.Interfaces.UserLanguages;
 using MDC.Server.Service.Services.UserLanguages;
+using MDC.Server.Service.Interfaces.Regions;
+using MDC.Server.Service.Services.Regions;
 
 
 
@@ -32,6 +34,7 @@ public static class ServiceExtension
         services.AddScoped<IEventRoleRepository, EventRoleRepository>();
         services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
         services.AddScoped<IUserLanguageRepository, UserLanguageRepository>();
+
 
         // Services
         services.AddScoped<IUserEventService, UserEventService>();
@@ -69,5 +72,8 @@ public static class ServiceExtension
         // UserLanguages
        services.AddScoped<IUserLanguageService, UserLanguageService>();
 
+        // Regions 
+        services.AddScoped<IRegionRepository, RegionRepository>();
+        services.AddScoped<IRegionService, RegionService>();
     }
 }
