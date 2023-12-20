@@ -31,11 +31,7 @@ public static class CollectionExtensions
             : throw new MDCException(400, "Please, enter valid numbers");
     }
 
-
-
-    public static IEnumerable<TEntity> ToPagedList<TEntity, TKey>(this IEnumerable<TEntity> source, PaginationParams @params)
     public static IQueryable<User> ToPagedList(this IQueryable<User> source, PaginationParams @params)
-
     {
 
         var metaData = new PaginationMetaData(source.Count(), @params);
