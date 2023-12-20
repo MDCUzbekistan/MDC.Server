@@ -32,7 +32,7 @@ public static class CollectionExtensions
 
 
 
-    public static IEnumerable<TEntity> ToPagedList<TEntity>(this IEnumerable<TEntity> source, PaginationParams @params)
+    public static IEnumerable<TEntity> ToPagedList<TEntity, TKey>(this IEnumerable<TEntity> source, PaginationParams @params)
     {
         if (@params.PageIndex < 1)
         {
