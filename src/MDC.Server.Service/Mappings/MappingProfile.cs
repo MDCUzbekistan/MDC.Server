@@ -13,6 +13,11 @@ using MDC.Server.Service.DTOs.UserLanguages;
 using MDC.Server.Domain.Entities.References;
 using MDC.Server.Domain.Entities.Communities;
 using MDC.Server.Service.DTOs.UserCommunities;
+using MDC.Server.Service.DTOs.EventAssets;
+using MDC.Server.Service.DTOs.UserDetails;
+using MDC.Server.Service.DTOs.Regions;
+using MDC.Server.Service.DTOs.CommunityImage;
+using MDC.Server.Service.DTOs.CommunityRoles;
 
 namespace MDC.Server.Service.Mappings;
 
@@ -82,6 +87,11 @@ public class MappingProfile : Profile
         CreateMap<UserCommunity, UserCommunityForResultDto>().ReverseMap();
         CreateMap<UserCommunity, UserCommunityForUpdateDto>().ReverseMap();
         CreateMap<UserCommunity, UserCommunityForCreationDto>().ReverseMap();
+        // Regions
+        CreateMap<Region, RegionForCreationDto>().ReverseMap();
+        CreateMap<Region, RegionForUpdateDto>().ReverseMap();
+        CreateMap<Region, RegionForResultDto>().ReverseMap();
+
         #endregion
 
     }

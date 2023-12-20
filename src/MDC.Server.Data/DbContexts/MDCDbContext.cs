@@ -5,6 +5,12 @@ using MDC.Server.Domain.Entities.References;
 using MDC.Server.Domain.Entities.Communities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using MDC.Server.Data.DbContexts.SeedDatas;
+using MDC.Server.Data.DbContexts.SeedDatas.SeedDataEvents;
+using MDC.Server.Data.DbContexts.SeedDatas.SeedDataUsers;
+using MDC.Server.Data.DbContexts.SeedData.SeedDataCommunities;
+using MDC.Server.Data.DbContexts.SeedData;
+using MDC.Server.Data.DbContexts.SeedData.SeedDataRegions;
 
 namespace MDC.Server.Data.DbContexts
 {
@@ -14,7 +20,9 @@ namespace MDC.Server.Data.DbContexts
            : base(options) { }
 
         public DbSet<Event> Events { get; set; }
+        public DbSet<Location> Locations { get; set; }
         public DbSet<Language> Languages { get; set; }
+        public DbSet<Region> Regions { get; set; }
         public DbSet<UserEvent> UserEvents { get; set; }
         public DbSet<EventRole> EventRoles { get; set; }
         public DbSet<Community> Communities { get; set; }
@@ -26,49 +34,39 @@ namespace MDC.Server.Data.DbContexts
         public DbSet<CommunityRole> CommunityRoles { get; set; }
         public DbSet<UserCommunity> UserCommunities { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<User>()
-        //    .HasOne(u => u.UserDetail)
-        //    .WithOne(ud => ud.User)
-        //    .HasForeignKey<UserDetail>(ud => ud.UserId)
-        //    .OnDelete(DeleteBehavior.Cascade);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        //    // User - UserLanguage
-        //    modelBuilder.Entity<UserLanguage>()
-        //        .HasOne(ul => ul.User)
-        //        .WithMany(l => l.Languages)
-        //        .HasForeignKey(ul => ul.UserId)
-        //        .OnDelete(DeleteBehavior.Cascade);
+            // Additional configuration for IdentityUserLogin<string>
+            modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(l => new { l.LoginProvider, l.ProviderKey });
 
-        //    // User - UserEvent
-        //    modelBuilder.Entity<UserEvent>()
-        //        .HasOne(ue => ue.User)
-        //        .WithMany(u => u.Events)
-        //        .HasForeignKey(ue => ue.UserId)
-        //        .OnDelete(DeleteBehavior.Cascade);
+            SeedData(modelBuilder);
+        }
+        private static void SeedData(ModelBuilder modelBuilder)
+        {
+            SeedDataRegion.SeedDataRegions(modelBuilder);
+            SeedDataLanguage.SeedLanguages(modelBuilder);
+            SeedDataLocation.SeedDataLocations(modelBuilder);
 
-        //    // User - UserCommunity
-        //    modelBuilder.Entity<UserCommunity>()
-        //        .HasOne(uc => uc.User)
-        //        .WithMany(u => u.UserCommunities)
-        //        .HasForeignKey(uc => uc.UserId)
-        //        .OnDelete(DeleteBehavior.Cascade);
+            SeedDataEvent.SeedDataEvents(modelBuilder);
 
-        //    // Event
-        //    modelBuilder.Entity<Event>()
-        //        .HasMany(e => e.Sessions)
-        //        .WithOne(es => es.Event)
-        //        .HasForeignKey(es => es.EventId)
-        //        .OnDelete(DeleteBehavior.Cascade);
+            SeedEventRole.SeedEventRoles(modelBuilder);
+            SeedEventAsset.SeedEventAssets(modelBuilder);
+            SeedEventSession.SeedEventSessions(modelBuilder);
 
-        //    //Comunity and UserComunity
-        //    modelBuilder.Entity<UserCommunity>()
-        //        .HasOne(uc => uc.Community)
-        //        .WithMany(c => c.UserCommunities)
-        //        .HasForeignKey(uc => uc.CommunityId)
-        //        .OnDelete(DeleteBehavior.Cascade);
-                
-        //}
+            SeedDataUser.SeedUsers(modelBuilder);
+
+            SeedDataUserDetail.SeedUserDetails(modelBuilder);
+            SeedSpeakerDeteil.SeedSpeakerDetails(modelBuilder);
+
+            SeedCommunity.SeedDataCommunty(modelBuilder);
+            SeedCommunityRoleData.SeedCommunityRoles(modelBuilder);
+
+            SeedUserEventData.SeedUserEvents(modelBuilder);
+            SeedUserLanguage.SeedUserLanguages(modelBuilder);
+            SeedUserCommunityData.SeedUserCommunities(modelBuilder);
+        }
+        
     }
 }
