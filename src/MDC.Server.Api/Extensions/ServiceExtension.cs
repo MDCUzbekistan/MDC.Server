@@ -9,10 +9,11 @@ using MDC.Server.Service.Interfaces.Users;
 using MDC.Server.Service.Interfaces.Events;
 using MDC.Server.Service.Services.Languages;
 using MDC.Server.Data.Repositories.Languages;
-using MDC.Server.Service.Interfaces.Languages;
 using MDC.Server.Data.IRepositories.Languages;
+using MDC.Server.Service.Interfaces.Languages;
 using MDC.Server.Service.Interfaces.Communities;
 using MDC.Server.Service.Services.CommunityRoles;
+using MDC.Server.Service.Services.UserCommunities;
 using MDC.Server.Service.Interfaces.CommunityRoles;
 using MDC.Server.Service.Interfaces.UserLanguages;
 using MDC.Server.Service.Services.UserLanguages;
@@ -41,24 +42,24 @@ public static class ServiceExtension
         services.AddScoped<IEventRoleService, EventRoleService>();
         services.AddScoped<ICommunityRoleRepository, CommunityRoleRepository>();
         services.AddScoped<ICommunityRoleService, CommunityRoleService>();
-      
+
         // Generic Repository
         services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 
-        //User
+        // User
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUserService, UserService>();
 
         // UserDetail
-        services.AddScoped<IUserDetailRepository, UserDetailRepository>();  
-        services.AddScoped<IUserDetailService, UserDetailService>();  
+        services.AddScoped<IUserDetailRepository, UserDetailRepository>();
+        services.AddScoped<IUserDetailService, UserDetailService>();
 
-        //Language
+        // Language
         services.AddScoped<ILanguageService, LanguageService>();
         services.AddScoped<ILanguageRepository, LanguageRepository>();
 
         // Communities
-        services.AddScoped<ICommunityService,CommunityService>();
+        services.AddScoped<ICommunityService, CommunityService>();
         services.AddScoped<ICommunityRepository, CommunityRepository>();
 
         // Events
@@ -69,8 +70,9 @@ public static class ServiceExtension
         services.AddScoped<IEventAssetService, EventAssetService>();
         services.AddScoped<IEventAssetReposiytory, EventAssetRepository>();
 
-        // UserLanguages
-       services.AddScoped<IUserLanguageService, UserLanguageService>();
+        // UserCommunities
+        services.AddScoped<IUserCommunityService, UserCommunityService>();
+        services.AddScoped<IUserCommunityRepository, UserCommunityRepository>();
 
         // Regions 
         services.AddScoped<IRegionRepository, RegionRepository>();
