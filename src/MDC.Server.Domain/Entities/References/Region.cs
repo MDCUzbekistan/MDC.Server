@@ -9,5 +9,7 @@ namespace MDC.Server.Domain.Entities.References
 {
     public class Region : Auditable<int>
     {
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
