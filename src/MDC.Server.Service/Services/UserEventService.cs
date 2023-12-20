@@ -138,6 +138,9 @@ public class UserEventService : IUserEventService
         var data = await this._userEventRepository
             .SelectAll()
             .Where(u => u.Id == id)
+            .Include(u => u.User)
+            .Include(u => u.Event)
+            .Include(u => u.Role)
             .AsNoTracking()
             .FirstOrDefaultAsync();
         if (data is null)

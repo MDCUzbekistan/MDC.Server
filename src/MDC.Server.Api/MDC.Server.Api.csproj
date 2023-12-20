@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -27,6 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Media\Community\Banners\" />
+    <Folder Include="wwwroot\Media\Community\Logos\" />
     <Folder Include="wwwroot\Media\Events\" />
     <Folder Include="wwwroot\Media\UserDetails\Images\" />
     <Folder Include="wwwroot\Media\UserDetails\Resumes\" />

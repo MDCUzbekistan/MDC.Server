@@ -24,17 +24,17 @@ namespace MDC.Server.Api.Middlewares
                 context.Response.StatusCode = ex.StatusCode;
                 await context.Response.WriteAsJsonAsync(new Response
                 {
-                    StatusCode = ex.StatusCode,
+                    Code = ex.StatusCode,
                     Message = ex.Message
                 });
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}\n\n");
+                _logger.LogError($"{ex.Message}\n\n");
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsJsonAsync(new Response
                 {
-                    StatusCode = 500,
+                    Code = 500,
                     Message = ex.Message
                 });
             }

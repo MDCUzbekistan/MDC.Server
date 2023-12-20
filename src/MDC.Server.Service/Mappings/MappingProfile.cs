@@ -1,16 +1,20 @@
-﻿using AutoMapper;
+using AutoMapper;
 using MDC.Server.Service.DTOs.Users;
 using MDC.Server.Service.DTOs.Events;
 using MDC.Server.Domain.Entities.Users;
-using MDC.Server.Domain.Entities.Events;
 using MDC.Server.Service.DTOs.Languages;
 using MDC.Server.Service.DTOs.Community;
+using MDC.Server.Domain.Entities.Events;
 using MDC.Server.Service.DTOs.EventRoles;
 using MDC.Server.Service.DTOs.UserEvents;
-using MDC.Server.Service.DTOs.UserDetails;
-using MDC.Server.Service.DTOs.EventAssets;
+using MDC.Server.Service.DTOs.UserLanguages;
 using MDC.Server.Domain.Entities.References;
 using MDC.Server.Domain.Entities.Communities;
+
+using MDC.Server.Service.DTOs.EventAssets;
+using MDC.Server.Service.DTOs.UserDetails;
+using MDC.Server.Service.DTOs.CommunityImage;
+using MDC.Server.Service.DTOs.CommunityRoles;
 
 namespace MDC.Server.Service.Mappings;
 
@@ -19,6 +23,12 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         #region
+
+        // UserLanguage
+        CreateMap<UserLanguage, UserLanguageForCreationDto>().ReverseMap();
+        CreateMap<UserLanguage, UserLanguageForResultDto>().ReverseMap();
+        CreateMap<UserLanguage, UserLanguageForUpdateDto>().ReverseMap();
+
         //Users
         CreateMap<User, UserForUpdateDto>().ReverseMap();
         CreateMap<User, UserForResultDto>().ReverseMap();
@@ -61,6 +71,13 @@ public class MappingProfile : Profile
         CreateMap<EventAsset, EventAssetForCreationDto>().ReverseMap();
         CreateMap<EventAsset, EventAssetForUpdateDto>().ReverseMap();
         CreateMap<EventAsset, EventAssetForResultDto>().ReverseMap();
+
+
+        // CommunityRole
+        CreateMap<CommunityRole,  CommunityRoleForCreationDto>().ReverseMap();
+        CreateMap<CommunityRole,  CommunityRoleForUpdateDto>().ReverseMap();
+        CreateMap<CommunityRole,  CommunityRoleForResultDto>().ReverseMap();
+
         #endregion
 
     }

@@ -3,6 +3,7 @@ using MDC.Server.Domain.Commons;
 using MDC.Server.Service.Exceptions;
 using MDC.Server.Domain.Configurations;
 using MDC.Server.Service.Commons.Helpers;
+using MDC.Server.Domain.Entities.Users;
 
 namespace MDC.Server.Service.Commons.Extensions;
 
@@ -30,7 +31,26 @@ public static class CollectionExtensions
             : throw new MDCException(400, "Please, enter valid numbers");
     }
 
+    public static IQueryable<User> ToPagedList(this IQueryable<User> source, PaginationParams @params)
+    {
 
+        var metaData = new PaginationMetaData(source.Count(), @params);
+
+        var json = JsonConvert.SerializeObject(metaData);
+        if (HttpContextHelper.ResponseHeaders != null)
+        {
+            if (HttpContextHelper.ResponseHeaders.ContainsKey("X-Pagination"))
+                HttpContextHelper.ResponseHeaders.Remove("X-Pagination");
+
+            HttpContextHelper.ResponseHeaders.Add("X-Pagination", json);
+        }
+
+        return @params.PageIndex > 0 && @params.PageSize > 0 ?
+            source
+            .OrderBy(s => s.Id)
+            .Skip((@params.PageIndex - 1) * @params.PageSize).Take(@params.PageSize)
+            : throw new MDCException(400, "Please, enter valid numbers");
+    }
 
     public static IEnumerable<TEntity> ToPagedList<TEntity>(this IEnumerable<TEntity> source, PaginationParams @params)
     {
@@ -46,4 +66,5 @@ public static class CollectionExtensions
 
         return source.Take((@params.PageSize * (@params.PageIndex - 1))..(@params.PageSize * (@params.PageIndex - 1) + @params.PageSize));
     }
+
 }

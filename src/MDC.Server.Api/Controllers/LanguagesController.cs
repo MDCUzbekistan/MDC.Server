@@ -1,4 +1,5 @@
-﻿using MDC.Server.Service.DTOs.Languages;
+﻿using MDC.Server.Domain.Configurations;
+using MDC.Server.Service.DTOs.Languages;
 using MDC.Server.Service.Interfaces.Languages;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +18,9 @@ public class LanguagesController : BaseController
     public async Task<IActionResult> InsertAsync([FromBody] LanguageForCreationDto dto)
         => Ok(await _languageService.CreateAsync(dto));
 
-    //[HttpGet]
-    //public async Task<IActionResult> GetAllAsync(PaginationParams @params)
-    //    => Ok(await _languageService.RetrieveAllAsync(@params));
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
+        => Ok(await _languageService.RetrieveAllAsync(@params));
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] short id)

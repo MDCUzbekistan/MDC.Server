@@ -3,17 +3,22 @@ using MDC.Server.Service.Services;
 using MDC.Server.Data.Repositories;
 using MDC.Server.Service.Interfaces;
 using MDC.Server.Data.IRepositories;
-using MDC.Server.Service.Interfaces.CommunityRoles;
-using MDC.Server.Service.Services.CommunityRoles;
-using MDC.Server.Data.IRepositories.Languages;
-using MDC.Server.Data.Repositories.Languages;
-using MDC.Server.Service.Interfaces.Communities;
-using MDC.Server.Service.Interfaces.Events;
-using MDC.Server.Service.Interfaces.Languages;
-using MDC.Server.Service.Services.Events;
-using MDC.Server.Service.Services.Languages;
-using MDC.Server.Service.Interfaces.Users;
 using MDC.Server.Service.Services.Users;
+using MDC.Server.Service.Services.Events;
+using MDC.Server.Service.Interfaces.Users;
+using MDC.Server.Service.Interfaces.Events;
+using MDC.Server.Service.Services.Languages;
+using MDC.Server.Data.Repositories.Languages;
+using MDC.Server.Service.Interfaces.Languages;
+using MDC.Server.Data.IRepositories.Languages;
+using MDC.Server.Service.Interfaces.Communities;
+using MDC.Server.Service.Services.CommunityRoles;
+using MDC.Server.Service.Interfaces.CommunityRoles;
+using MDC.Server.Service.Interfaces.UserLanguages;
+using MDC.Server.Service.Services.UserLanguages;
+
+
+
 
 namespace MDC.Server.Api.Extensions;
 
@@ -21,13 +26,12 @@ public static class ServiceExtension
 {
     public static void AddCustomService(this IServiceCollection services)
     {
-        services.AddAutoMapper(typeof(MappingProfile));
-
         // Repository
         services.AddScoped<IEventRepository, EventRepository>();
         services.AddScoped<IUserEventRepository, UserEventRepository>();
         services.AddScoped<IEventRoleRepository, EventRoleRepository>();
         services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+        services.AddScoped<IUserLanguageRepository, UserLanguageRepository>();
 
         // Services
         services.AddScoped<IUserEventService, UserEventService>();
@@ -39,7 +43,8 @@ public static class ServiceExtension
         services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 
         //User
-        
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserService, UserService>();
 
         // UserDetail
         services.AddScoped<IUserDetailRepository, UserDetailRepository>();  
@@ -61,6 +66,8 @@ public static class ServiceExtension
         services.AddScoped<IEventAssetService, EventAssetService>();
         services.AddScoped<IEventAssetReposiytory, EventAssetRepository>();
 
+        // UserLanguages
+       services.AddScoped<IUserLanguageService, UserLanguageService>();
 
     }
 }

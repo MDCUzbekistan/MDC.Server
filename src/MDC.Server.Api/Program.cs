@@ -1,12 +1,14 @@
 using Serilog;
+using Newtonsoft.Json;
 using MDC.Server.Api.Models;
 using MDC.Server.Api.Extensions;
-using MDC.Server.Service.Helpers;
 using MDC.Server.Data.DbContexts;
+using MDC.Server.Service.Helpers;
 using MDC.Server.Service.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Identity;
+using MDC.Server.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,10 +16,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MDCDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+////// Fix the Cycle
+builder.Services.AddControllers()
+     .AddNewtonsoftJson(options =>
+     {
+         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+     });
 // Add Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<MDCDbContext>()
     .AddDefaultTokenProviders();
+
 
 builder.Services.AddControllers();
 builder.Services.AddCustomService();
@@ -53,7 +63,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ExceptionHandlerMiddleWare>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthorization();
