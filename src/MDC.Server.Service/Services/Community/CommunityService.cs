@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
+using MDC.Server.Service.Helpers;
 using MDC.Server.Data.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using MDC.Server.Service.Exceptions;
 using MDC.Server.Service.DTOs.Community;
+using MDC.Server.Service.DTOs.CommunityImage;
 using MDC.Server.Domain.Entities.Communities;
 using MDC.Server.Service.Interfaces.Communities;
-using MDC.Server.Service.Helpers;
-using MDC.Server.Service.DTOs.CommunityImage;
 
 namespace MDC.Server.Service.Services;
 
