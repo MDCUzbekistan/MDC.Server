@@ -7,6 +7,8 @@ using MDC.Server.Domain.Entities.Users;
 using MDC.Server.Service.DTOs.SpeakerDetails;
 using MDC.Server.Data.IRepositories.SpeakerDetails;
 using MDC.Server.Service.Interfaces.SpeakerDetails;
+using MDC.Server.Domain.Configurations;
+using MDC.Server.Service.Commons.Extensions;
 
 namespace MDC.Server.Service.Services.SpeakerDetails
 {
@@ -15,33 +17,35 @@ namespace MDC.Server.Service.Services.SpeakerDetails
         #region
         private readonly IMapper _mapper;
         private readonly ISpeakerDetailRepository _speakerDetailRepository;
-        private readonly IUserRepository _userRepository;
 
         public SpeakerDetailService(IMapper mapper,
-            ISpeakerDetailRepository speakerDetailRepository,
-            IUserRepository userRepository)
+            ISpeakerDetailRepository speakerDetailRepository)
 
         {
             _mapper = mapper;
             _speakerDetailRepository = speakerDetailRepository;
-            _userRepository = userRepository;
         }
 
-        public async Task<bool> RemoveAsync(string id)
+        public async Task<bool> RemoveAsync(long id)
         {
-            var removeSpeaker = _userRepository.SelectAll()
+            var removeSpeaker = _speakerDetailRepository.SelectAll()
                  .Where(s => s.Id == id)
                  .FirstOrDefaultAsync() ??
                     throw new MDCException(404, "Speaker is not found! ");
 
-            await _userRepository.DeleteAsync(id);
+            var speechImageFullPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, removeSpeaker.Result.SpeechImage);
+
+            if (File.Exists(speechImageFullPath))
+                File.Delete(speechImageFullPath);
+
+            await _speakerDetailRepository.DeleteAsync(id);
 
             return true;
         }
 
-        public async Task<SpeakerDetailForResultDto> RetrieveByIdAsync(string id)
+        public async Task<SpeakerDetailForResultDto> RetrieveByIdAsync(long id)
         {
-            var byIdSpeaker = await _userRepository.SelectAll()
+            var byIdSpeaker = await _speakerDetailRepository.SelectAll()
                  .Where(s => s.Id == id)
                  .AsNoTracking()
                  .FirstOrDefaultAsync() ??
@@ -51,11 +55,13 @@ namespace MDC.Server.Service.Services.SpeakerDetails
         }
 
 
-        public async Task<IEnumerable<SpeakerDetailForResultDto>> RetrieveAllAsync()
+        public async Task<IEnumerable<SpeakerDetailForResultDto>> RetrieveAllAsync(PaginationParams @params)
         {
-            var allSpeaker = await _userRepository.SelectAll()
-                 .AsNoTracking()
-                 .ToListAsync();
+            var allSpeaker = await _speakerDetailRepository.SelectAll()
+                .Include(s => s.UserId)
+                .AsNoTracking()
+                .ToPagedList<SpeakerDetail, long> (@params)
+                .ToListAsync();
 
             return _mapper.Map<IEnumerable<SpeakerDetailForResultDto>>(allSpeaker);
         }
@@ -63,8 +69,8 @@ namespace MDC.Server.Service.Services.SpeakerDetails
 
         public async Task<SpeakerDetailForResultDto> AddAsync(SpeakerDetailForCreationDto dto)
         {
-            var user = await _userRepository.SelectAll()
-                 .Where(u => u.Id == dto.UserId)
+            var user = await _speakerDetailRepository.SelectAll()
+                 .Where(u => u.UserId == dto.UserId)
                  .AsNoTracking()
                  .FirstOrDefaultAsync();
 
@@ -87,18 +93,33 @@ namespace MDC.Server.Service.Services.SpeakerDetails
                 CreatedAt = DateTime.UtcNow
             };
 
+         
             var addSpeker = await _speakerDetailRepository.InsertAsync(mappedSpeaker);
 
             return _mapper.Map<SpeakerDetailForResultDto>(mappedSpeaker);
         }
 
 
-        public async Task<SpeakerDetailForResultDto> ModifyAsync(string id, SpeakerDetailForUpdateDto dto)
+        public async Task<SpeakerDetailForResultDto> ModifyAsync(long id, SpeakerDetailForUpdateDto dto)
         {
-            var updateSpeaker = await _userRepository.SelectAll()
+            var updateSpeaker = await _speakerDetailRepository.SelectAll()
                  .Where(s => s.Id == id)
                  .FirstOrDefaultAsync() ??
                     throw new MDCException(404, "Speaker not faund! ");
+
+            var speechImageFullPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, updateSpeaker.SpeechImage);
+
+            if (File.Exists(speechImageFullPath))
+                File.Delete(speechImageFullPath);
+
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(dto.SpeechImage.FileName);
+            var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "SpeechImage", fileName);
+            using (var stream = new FileStream(rootPath, FileMode.Create))
+            {
+                await dto.SpeechImage.CopyToAsync(stream);
+                await stream.FlushAsync();
+                stream.Close();
+            }
 
             updateSpeaker.UpdatedAt = DateTime.UtcNow;
             var upSpeaker = _mapper.Map(dto, updateSpeaker);
