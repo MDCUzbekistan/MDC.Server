@@ -17,23 +17,23 @@ namespace MDC.Server.Api.Controllers.SpeakerDetails
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync([FromForm] SpeakerDetailForCreationDto dto)
-            => Ok(await _speakerDetailService.AddAsync(dto));
+        public async Task<IActionResult> PostAsync([FromForm] SpeakerDetailForCreationDto dto)
+            => Ok(await this._speakerDetailService.AddAsync(dto));
 
         [HttpGet]
-        public async Task<IActionResult> RetrieveAllAsync([FromQuery] PaginationParams @params)
-            => Ok(await _speakerDetailService.RetrieveAllAsync(@params));
+        public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
+            => Ok(await this._speakerDetailService.RetrieveAllAsync(@params));
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> RetrieveByIdAsync([FromRoute] long id)
-            => Ok(await _speakerDetailService.RetrieveByIdAsync(id));
+        public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
+            => Ok(await this._speakerDetailService.RetrieveByIdAsync(id));
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> ModifyAsync([FromForm] long id, SpeakerDetailForUpdateDto dto)
-           => Ok(await _speakerDetailService.ModifyAsync(id, dto));
+        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromForm] SpeakerDetailForUpdateDto dto)
+           => Ok(await this._speakerDetailService.ModifyAsync(id, dto));
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> RemoveAsync([FromRoute] long id)
-            => Ok(await _speakerDetailService.RemoveAsync(id));  
+        public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id)
+            => Ok(await this._speakerDetailService.RemoveAsync(id));  
     }
 }

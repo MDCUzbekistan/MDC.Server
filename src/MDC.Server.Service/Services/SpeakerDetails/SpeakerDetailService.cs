@@ -51,30 +51,6 @@ namespace MDC.Server.Service.Services.SpeakerDetails
         }
 
 
-        public async Task<IEnumerable<SpeakerDetailForResultDto>> RetrieveAllAsync(PaginationParams @params)
-        {
-            var allSpeaker = await _speakerDetailRepository.SelectAll()
-                .Include(sd => sd.UserId)
-                .AsNoTracking()
-                .ToPagedList<SpeakerDetail, long> (@params)
-                .ToListAsync();
-
-            return _mapper.Map<IEnumerable<SpeakerDetailForResultDto>>(allSpeaker);
-        }
-
-
-        public async Task<SpeakerDetailForResultDto> RetrieveByIdAsync(long id)
-        {
-            var byIdSpeaker = await _speakerDetailRepository.SelectAll()
-                 .Where(sd => sd.Id == id)
-                 .AsNoTracking()
-                 .FirstOrDefaultAsync() ??
-                     throw new MDCException(404, "Speaker is not found!");
-
-            return _mapper.Map<SpeakerDetailForResultDto>(byIdSpeaker);
-        }
-
-
         public async Task<SpeakerDetailForResultDto> ModifyAsync(long id, SpeakerDetailForUpdateDto dto)
         {
             var updateSpeaker = await _speakerDetailRepository.SelectAll()
@@ -107,6 +83,30 @@ namespace MDC.Server.Service.Services.SpeakerDetails
 
             return _mapper.Map<SpeakerDetailForResultDto>(mappedSpeakerDetail);
 
+        }
+
+
+        public async Task<IEnumerable<SpeakerDetailForResultDto>> RetrieveAllAsync(PaginationParams @params)
+        {
+            var allSpeaker = await _speakerDetailRepository.SelectAll()
+                .Include(sd => sd.UserId)
+                .AsNoTracking()
+                .ToPagedList<SpeakerDetail, long> (@params)
+                .ToListAsync();
+
+            return _mapper.Map<IEnumerable<SpeakerDetailForResultDto>>(allSpeaker);
+        }
+
+
+        public async Task<SpeakerDetailForResultDto> RetrieveByIdAsync(long id)
+        {
+            var byIdSpeaker = await _speakerDetailRepository.SelectAll()
+                 .Where(sd => sd.Id == id)
+                 .AsNoTracking()
+                 .FirstOrDefaultAsync() ??
+                     throw new MDCException(404, "Speaker is not found!");
+
+            return _mapper.Map<SpeakerDetailForResultDto>(byIdSpeaker);
         }
 
 
