@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MDC.Server.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class IMigration : Migration
+    public partial class CommunityMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,11 +72,6 @@ namespace MDC.Server.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Communities", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Communities_Communities_ParentId",
-                        column: x => x.ParentId,
-                        principalTable: "Communities",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -297,28 +292,6 @@ namespace MDC.Server.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CommunityImages",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Image = table.Column<string>(type: "text", nullable: true),
-                    CommunityId = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CommunityImages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CommunityImages_Communities_CommunityId",
-                        column: x => x.CommunityId,
-                        principalTable: "Communities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserCommunities",
                 columns: table => new
                 {
@@ -531,16 +504,6 @@ namespace MDC.Server.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Communities_ParentId",
-                table: "Communities",
-                column: "ParentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CommunityImages_CommunityId",
-                table: "CommunityImages",
-                column: "CommunityId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_EventAssets_EventId",
                 table: "EventAssets",
                 column: "EventId");
@@ -629,9 +592,6 @@ namespace MDC.Server.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "CommunityImages");
 
             migrationBuilder.DropTable(
                 name: "EventAssets");

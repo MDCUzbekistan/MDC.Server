@@ -71,8 +71,6 @@ public class MappingProfile : Profile
         CreateMap<EventAsset, EventAssetForUpdateDto>().ReverseMap();
         CreateMap<EventAsset, EventAssetForResultDto>().ReverseMap();
 
-        CreateMap<CommunityImage, CommunityImageForCreationDto>().ReverseMap();
-        CreateMap<CommunityImage,CommunityImageForResultDto>().ReverseMap();
         #endregion
 
     }

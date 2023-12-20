@@ -15,13 +15,11 @@ public  class CommunityService : ICommunityService
   
     private readonly IMapper _mapper;
     private readonly ICommunityRepository _communityRepository;
-    private readonly ICommunityImageRepository _communityImageRepository;
 
-    public CommunityService(IMapper mapper, ICommunityRepository communityRepository, ICommunityImageRepository communityImageRepository)
+    public CommunityService(IMapper mapper, ICommunityRepository communityRepository)
     {
         _mapper = mapper;
         _communityRepository = communityRepository;
-        _communityImageRepository = communityImageRepository;
     }
 
     public async Task<CommunityForResultDto> CreateAsync(CommunityForCreationDto communityDto)
