@@ -5,6 +5,6 @@ namespace MDC.Server.Service.DTOs.UserLanguages;
 
 public class UserLanguageForCreationDto
 {
-    public long UserId { get; set; }
+    public string UserId { get; set; }
     public short LanguageId { get; set; }
 }

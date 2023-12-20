@@ -14,6 +14,8 @@ using MDC.Server.Service.Services.Events;
 using MDC.Server.Service.Services.Languages;
 using MDC.Server.Service.Interfaces.Users;
 using MDC.Server.Service.Services.Users;
+using MDC.Server.Service.Interfaces.UserLanguages;
+using MDC.Server.Service.Services.UserLanguages;
 
 
 
@@ -64,7 +66,7 @@ public static class ServiceExtension
         services.AddScoped<IEventAssetReposiytory, EventAssetRepository>();
 
         // UserLanguages
-       // services.AddScoped<IUserLanguageService, UserLanguageService>();
+       services.AddScoped<IUserLanguageService, UserLanguageService>();
 
     }
 }

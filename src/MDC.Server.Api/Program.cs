@@ -8,6 +8,7 @@ using MDC.Server.Service.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Identity;
+using MDC.Server.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,7 +63,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ExceptionHandlerMiddleWare>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthorization();

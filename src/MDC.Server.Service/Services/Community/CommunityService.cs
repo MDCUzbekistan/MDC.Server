@@ -28,7 +28,7 @@ public  class CommunityService : ICommunityService
         if (community is not null)
             throw new MDCException(409, "Community already exists !");
 
-        if (communityDto.ParentId != 0)
+        if (communityDto.ParentId is not null)
         {
             var subCommunity = await _communityRepository.SelectAll()
                 .Where(sb => sb.Id == communityDto.ParentId)
@@ -37,6 +37,7 @@ public  class CommunityService : ICommunityService
 
             if (subCommunity is null )
                 throw new MDCException(404, "SubComunity is not found");
+
         }
 
         var mappedComunity = _mapper.Map<Community>(communityDto);
