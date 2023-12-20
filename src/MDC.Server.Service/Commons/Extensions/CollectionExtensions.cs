@@ -33,6 +33,7 @@ public static class CollectionExtensions
 
 
 
+    public static IEnumerable<TEntity> ToPagedList<TEntity, TKey>(this IEnumerable<TEntity> source, PaginationParams @params)
     public static IQueryable<User> ToPagedList(this IQueryable<User> source, PaginationParams @params)
 
     {

@@ -5,6 +5,8 @@ using MDC.Server.Service.DTOs.Languages;
 using MDC.Server.Domain.Entities.References;
 using MDC.Server.Data.IRepositories.Languages;
 using MDC.Server.Service.Interfaces.Languages;
+using MDC.Server.Domain.Configurations;
+using MDC.Server.Service.Commons.Extensions;
 
 namespace MDC.Server.Service.Services.Languages;
 
@@ -66,15 +68,15 @@ public class LanguageService : ILanguageService
         return await _languageRepository.DeleteAsync(id); ;
     }
 
-    //public async Task<IEnumerable<LanguageForResultDto>> RetrieveAllAsync(PaginationParams @params)
-    //{
-    //    var languages = await _languageRepository.SelectAll()
-    //        .AsNoTracking()
-    //        .ToPagedList(@params)
-    //        .ToListAsync();
+    public async Task<IEnumerable<LanguageForResultDto>> RetrieveAllAsync(PaginationParams @params)
+    {
+        var languages = await _languageRepository.SelectAll()
+            .AsNoTracking()
+            .ToPagedList<Language, short>(@params)
+            .ToListAsync();
 
-    //    return _mapper.Map<IEnumerable<LanguageForResultDto>>(languages);
-    //}
+        return _mapper.Map<IEnumerable<LanguageForResultDto>>(languages);
+    }
 
     public async Task<LanguageForResultDto> RetrieveByIdAsync(short id)
     {
