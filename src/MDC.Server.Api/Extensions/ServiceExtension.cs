@@ -16,6 +16,8 @@ using MDC.Server.Service.Interfaces.Users;
 using MDC.Server.Service.Services.Users;
 using MDC.Server.Data.IRepositories.SpeakerDetails;
 using MDC.Server.Data.Repositories.SpeakerDetails;
+using MDC.Server.Service.Interfaces.SpeakerDetails;
+using MDC.Server.Service.Services.SpeakerDetails;
 
 
 
@@ -42,7 +44,8 @@ public static class ServiceExtension
         services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 
         //User
-        
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserService, UserService>();
 
         // UserDetail
         services.AddScoped<IUserDetailRepository, UserDetailRepository>();  
