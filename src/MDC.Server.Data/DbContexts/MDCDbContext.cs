@@ -10,7 +10,6 @@ using MDC.Server.Data.DbContexts.SeedDatas.SeedDataEvents;
 using MDC.Server.Data.DbContexts.SeedDatas.SeedDataUsers;
 using MDC.Server.Data.DbContexts.SeedData.SeedDataCommunities;
 using MDC.Server.Data.DbContexts.SeedData;
-using MDC.Server.Data.DbContexts.SeedData.SeedDataRegions;
 
 namespace MDC.Server.Data.DbContexts
 {
@@ -45,7 +44,7 @@ namespace MDC.Server.Data.DbContexts
         }
         private static void SeedData(ModelBuilder modelBuilder)
         {
-            SeedDataRegion.SeedDataRegions(modelBuilder);
+            SeedDataRegion.SeedRegions(modelBuilder);
             SeedDataLanguage.SeedLanguages(modelBuilder);
             SeedDataLocation.SeedDataLocations(modelBuilder);
 
