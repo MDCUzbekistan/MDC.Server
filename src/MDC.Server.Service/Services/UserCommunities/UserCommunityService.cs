@@ -64,24 +64,28 @@ public class UserCommunityService : IUserCommunityService
     {
         var user = _userRepository.SelectAll()
             .Where(u => u.Id == dto.UserId)
+            .AsNoTracking()
             .FirstOrDefaultAsync();
         if (user is null)
             throw new MDCException(404, "User is not found");
 
         var community = _communityRepository.SelectAll()
             .Where(c => c.Id == dto.CommunityId)
+            .AsNoTracking()
             .FirstOrDefaultAsync();
         if (community is null)
             throw new MDCException(404, "Community is not found");
 
         var communityRole = _communityRoleRepository.SelectAll()
             .Where(cr => cr.Id == dto.RoleId)
+            .AsNoTracking()
             .FirstOrDefaultAsync();
         if (communityRole is null)
             throw new MDCException(404, "CommunityRole is not found");
 
         var userCommunity = await _userCommunityRepository.SelectAll()
             .Where(uc => uc.Id == id)
+            .AsNoTracking()
             .FirstOrDefaultAsync();
         if (userCommunity is null)
             throw new MDCException(404, "UserCommunity is not found");
@@ -109,22 +113,22 @@ public class UserCommunityService : IUserCommunityService
     public async Task<IEnumerable<UserCommunityForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
         var userCommunity = _userCommunityRepository.SelectAll()
-            .Include(u => u.User)
-            .Include(c => c.Community)
-            .Include(cr => cr.Role)
+            .Include(uc => uc.User)
+            .Include(uc => uc.Community)
+            .Include(uc => uc.Role)
             .AsNoTracking()
-            .ToPagedList(@params);
+            .ToPagedList<UserCommunity,long>(@params);
 
         return _mapper.Map<IEnumerable<UserCommunityForResultDto>>(userCommunity);
     }
 
     public async Task<UserCommunityForResultDto> RetrieveByIdAsync(long id)
     {
-        var userCommunity = _userCommunityRepository.SelectAll()
+        var userCommunity =  await _userCommunityRepository.SelectAll()
             .Where(uc => uc.Id == id)
-            .Include(u => u.User)
-            .Include(c => c.Community)
-            .Include(cr => cr.Role)
+            .Include(uc => uc.User)
+            .Include(uc => uc.Community)
+            .Include(uc => uc.Role)
             .FirstOrDefaultAsync();
         if (userCommunity is null)
             throw new MDCException(404, "UserCommunity is not found");
