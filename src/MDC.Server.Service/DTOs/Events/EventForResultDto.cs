@@ -2,6 +2,7 @@
 using MDC.Server.Domain.Entities.References;
 using MDC.Server.Domain.Entities.Users;
 using MDC.Server.Domain.Enums;
+using MDC.Server.Service.DTOs.UserEvents;
 
 namespace MDC.Server.Service.DTOs.Events;
 
@@ -18,6 +19,6 @@ public class EventForResultDto
     public DateTime? StartAt { get; set; }
     public DateTime? EndAt { get; set; }
 
-    public ICollection<UserEvent> Users { get; set; }
-    public ICollection<EventSession> Sessions { get; set; }
+    public ICollection<UserEventForResultDto> Users { get; set; }
+    public ICollection<EventSessionForResultDto> Sessions { get; set; }
 }

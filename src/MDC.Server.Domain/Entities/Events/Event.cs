@@ -19,6 +19,6 @@ namespace MDC.Server.Domain.Entities.Events
         public DateTime? EndAt { get; set; }
 
         public ICollection<UserEvent> Users { get; set; }
-        public ICollection<EventSession> Sessions { get; set; }
+        public ICollection<EventSessionForResultDto> Sessions { get; set; }
     }
 }
