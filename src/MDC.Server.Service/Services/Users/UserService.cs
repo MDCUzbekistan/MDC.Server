@@ -5,6 +5,8 @@ using MDC.Server.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using MDC.Server.Domain.Entities.Users;
 using MDC.Server.Service.Interfaces.Users;
+using MDC.Server.Domain.Configurations;
+using MDC.Server.Service.Commons.Extensions;
 
 namespace MDC.Server.Service.Services.Users;
 public class UserService : IUserService
@@ -68,9 +70,10 @@ public class UserService : IUserService
         return true;
     }
 
-    public async Task<IEnumerable<UserForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<UserForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
         var users = await _userRepository.SelectAll()
+            .ToPagedList(@params)
              .AsNoTracking()
              .ToListAsync();
 
